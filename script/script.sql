@@ -1,3 +1,11 @@
+DROP DATABASE PrevisionBudget;
+
+DROP TABLE solde;
+DROP TABLE prevision;
+DROP TABLE categorie;
+DROP TABLE periode;
+DROP TABLE departement;
+
 CREATE DATABASE PrevisionBudget;
 USE PrevisionBudget;
 
@@ -14,7 +22,7 @@ CREATE TABLE periode (
     dateFin DATE
 );
 
--- Par ex: 
+-- Par ex : 
 -- Categorie : Recette
 -- Type : Vente
 -- Nature : Vente de produits agricoles
