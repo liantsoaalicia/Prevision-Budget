@@ -28,7 +28,7 @@
                 <li class="dropdown">
                     <button class="dropbtn">Cat&eacute;gories</button>
                     <div class="dropdown-content">
-                        <a href="#categories">Liste des cat&eacute;gories</a>
+                        <a href="template.php?page=listeCategorie">Liste des cat&eacute;gories</a>
                         <a href="#ajout-categorie">Ajouter cat&eacute;gorie</a>
                     </div>
                 </li>

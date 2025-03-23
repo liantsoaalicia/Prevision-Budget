@@ -1,5 +1,5 @@
 <?php
-    require('../inc/fonction.php');
+    require('../inc/fonctions.php');
     $departements = getAllDepartements();
 
 ?>

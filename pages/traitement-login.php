@@ -1,6 +1,6 @@
 <?php 
 
-    include('../inc/fonction.php');
+    include('../inc/fonctions.php');
     $id = $_POST['idDepartement'];
     $mdp = $_POST['mdp'];
 
