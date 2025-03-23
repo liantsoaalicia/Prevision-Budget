@@ -1,7 +1,9 @@
 <?php
-require('../inc/fonction.php');
-$departements = getAllDepartements();
+    require('../inc/fonction.php');
+    $departements = getAllDepartements();
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +36,6 @@ $departements = getAllDepartements();
             
             <button type="submit">Se connecter</button>
         </form>
-    </div> >
+    </div> 
 </body>
 </html>
