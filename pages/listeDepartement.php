@@ -28,7 +28,7 @@
                             echo '<a href="template.php?page=modifierDepartement&id=' . $departement['idDepartement'] . '" class="icones">';
                             echo '    <img src="../assets/icon/modif.png" alt="Modifier">';
                             echo '</a>';
-                            echo '<a href="template.php?page=supprimerDepartement&id=' . $departement['idDepartement'] . '" class="icones">';
+                            echo '<a href="traitement-suppression-dpt.php?id=' . $departement['idDepartement'] . '" class="icones">';
                             echo '    <img src="../assets/icon/delete.png" alt="Supprimer">';
                             echo '</a>';
                             echo '</td>';
