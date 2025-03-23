@@ -1,6 +1,8 @@
 <?php
     $page = "accueil";
-    //$page = $_GET['page'];
+    if(isset($_GET['page'])){
+        $page = $_GET['page'];
+    }
     $page = $page.".php";
 ?>
 <!DOCTYPE html>
@@ -18,7 +20,7 @@
                 <li class="dropdown">
                     <button class="dropbtn">D&eacute;partements</button>
                     <div class="dropdown-content">
-                        <a href="#departements">Liste des d&eacute;partements</a>
+                        <a href="template.php?page=listeDepartement">Liste des d&eacute;partements</a>
                         <a href="#ajout-departement">Ajouter d&eacute;partement</a>
                         <a href="#budget-departement">Voir budget d&eacute;partement</a>
                     </div>
