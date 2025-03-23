@@ -1,9 +1,5 @@
 <?php 
 
-include('inc/connection.php');
-$conn = dbConnect();
-if($conn) {
-    echo 'Connexion reussie';
-}
+    header('Location: pages/login.php');
 
 ?>
