@@ -33,7 +33,7 @@
         $con = dbConnect();
         $query = "SELECT nom FROM departement WHERE idDepartement = :id";
         $stmt = $con->prepare($query);
-        $stmt->bindParam('idDepartement', $idDepartement, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         $departement = $stmt->fetch(PDO::FETCH_ASSOC);
         return $departement;
@@ -124,5 +124,26 @@
         } else {
             return false; 
         }
+    }
+
+    function insertDepartement($nom) {
+        $con = dbConnect();
+        $query = "INSERT INTO departement (nom) VALUES (:nom)";
+        $stmt = $con->prepare($query);
+
+        $stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
+        if ($stmt->execute()) {
+            return true; 
+        } else {
+            return false; 
+        }
+    }
+
+    function verifyIfFinance($sessionId) {
+        $departement = getDepartementById($sessionId);
+        $nom = $departement['nom'];
+        if($nom == 'Departement Finance') {
+            return true;
+        } return false;
     }
 ?>

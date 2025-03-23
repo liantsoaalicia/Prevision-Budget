@@ -1,9 +1,14 @@
 <?php
+    session_start();
+    include('../inc/fonctions.php');
     $page = "accueil";
     if(isset($_GET['page'])){
         $page = $_GET['page'];
     }
     $page = $page.".php";
+
+    $deptConnecte = getDepartementById($_SESSION['id']);
+    $nomDeptConnecte = $deptConnecte['nom'];
 ?>
 
 <!DOCTYPE html>
@@ -18,11 +23,15 @@
     <header>
         <nav class="main-nav">
             <ul>
+            <div class="dept-connecte">
+                <span class="point-vert"></span>
+                <span class="nom-dept"><?= htmlspecialchars($nomDeptConnecte) ?></span>
+            </div>
                 <li class="dropdown">
                     <button class="dropbtn">Départements</button>
                     <div class="dropdown-content">
                         <a href="template.php?page=listeDepartement">Liste des départements</a>
-                        <a href="#ajout-departement">Ajouter département</a>
+                        <a href="template.php?page=ajout-departement">Ajouter département</a>
                         <a href="#budget-departement">Voir budget département</a>
                     </div>
                 </li>

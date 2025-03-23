@@ -284,3 +284,27 @@ button:hover {
     gap: 1rem;
     justify-content: flex-start;
 }
+
+.dept-connecte {
+    display: flex;
+    align-items: center; 
+    background-color: var(--primary-color); 
+    color: var(--text-light); 
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px; 
+}
+
+.point-vert {
+    display: inline-block;
+    width: 12px; 
+    height: 12px; 
+    background-color: #28a745; 
+    border-radius: 50%; 
+    margin-right: 0.75rem; 
+}
+
+.nom-dept {
+    color: var(--text-light); 
+}

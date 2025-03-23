@@ -1,5 +1,3 @@
-<?php include("../inc/fonctions.php"); ?>
-
 <section id="categories-list">
     <div class="categories-container">
         <h1 class="main-title">Liste des Catégories</h1>

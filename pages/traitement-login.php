@@ -1,5 +1,6 @@
 <?php 
 
+    session_start();
     include('../inc/fonctions.php');
     $id = $_POST['idDepartement'];
     $mdp = $_POST['mdp'];
