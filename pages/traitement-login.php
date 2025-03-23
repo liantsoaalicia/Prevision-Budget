@@ -7,10 +7,10 @@
     $log = login($id, $mdp);
     if($log == 1) {
         $_SESSION['id'] = $id;
-        header('Location: accueil.php');
+        header('Location:template.php?page=accueil');
         exit();
     } else {
-        header('Location: login.php?error='.$log);
+        header('Location:login.php?error='.$log);
         exit();
     }
 
