@@ -76,4 +76,30 @@
             die($e->getMessage());
         }
     }
+
+    function listerCategories() {
+        $con = dbConnect();
+        $query = "SELECT * FROM categorie";
+        $stmt = $con->prepare($query);
+        $stmt->execute();
+        $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $depenses = [];
+        $recettes = [];
+
+        foreach ($categories as $categorie) {
+            if ($categorie['categorie'] == 'Depense') {
+                $depenses[] = $categorie;
+            } elseif ($categorie['categorie'] == 'Recette') {
+                $recettes[] = $categorie;
+            }
+        }
+
+        return [
+            'depenses' => $depenses,
+            'recettes' => $recettes
+        ];
+    }
+    
+
 ?>
