@@ -4,7 +4,14 @@
     $departements = getAllDepartements();
 ?>
 
-<section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
     <?php if(isset($_GET['error'])) { ?>
         <h3 style="color: red;"><?= $_GET['error'] ?></h3>
     <?php } ?>
@@ -19,4 +26,5 @@
         <label for="mdp">Mot de passe <input type="password" name="mdp" id="mdp"></label>
         <button type="submit">Se connecter</button>
     </form>
-</section>
+</body>
+</html>
