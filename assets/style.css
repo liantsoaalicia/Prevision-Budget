@@ -1,0 +1,254 @@
+/* Variables de couleurs */
+:root {
+    --gray-light: #f5f5f5;
+    --gray-medium: #e0e0e0;
+    --gray-dark: #9e9e9e;
+    --gray-darker: #616161;
+    --primary-bg: #ffffff;
+}
+
+/* Réinitialisation générale */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styles généraux */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--gray-light);
+    line-height: 1.6;
+}
+
+/* Navigation principale */
+.main-nav {
+    background-color: var(--gray-darker);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.main-nav ul {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+/* Boutons de menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin: 0 1rem;
+}
+
+.dropbtn {
+    width: 180px;
+    background-color: var(--gray-darker);
+    color: white;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+.dropbtn:hover {
+    background-color: var(--gray-medium);
+}
+
+/* Menus déroulants */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--primary-bg);
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 101;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dropdown-content a {
+    color: var(--gray-darker);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--gray-light);
+}
+
+/* Animation des menus */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Contenu principal */
+.content {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--primary-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 1px solid var(--gray-medium);
+    border-radius: 4px;
+}
+
+h2 {
+    color: var(--gray-darker);
+    margin-bottom: 1rem;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-medium);
+}
+
+th {
+    background-color: var(--gray-light);
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: var(--gray-light);
+}
+
+tr:hover {
+    background-color: var(--gray-medium);
+}
+
+/* Formulaires */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--gray-darker);
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--gray-medium);
+    border-radius: 4px;
+}
+
+/* Boutons d'action */
+button {
+    background-color: var(--gray-darker);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--gray-medium);
+}
+
+/* Médias queries pour responsive */
+@media screen and (max-width: 768px) {
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dropdown {
+        margin: 0.5rem 0;
+    }
+
+    .dropbtn {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .content {
+        margin: 1rem;
+        padding: 1rem;
+    }
+}
+
+
+/*accueil.php */
+/* Styles pour la page d'accueil */
+.main-title {
+    font-size: 2.5rem;
+    color: var(--gray-darker);
+    text-align: center;
+    margin: 2rem 0;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+#menu-description {
+    padding: 2rem;
+    background-color: var(--primary-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.menu-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.menu-item {
+    background-color: var(--gray-light);
+    padding: 1.5rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.menu-item:hover {
+    background-color: var(--gray-medium);
+}
+
+.menu-item h3 {
+    color: var(--gray-darker);
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+}
+
+.menu-item p {
+    color: var(--gray-dark);
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .menu-sections {
+        grid-template-columns: 1fr;
+    }
+    
+    #menu-description {
+        padding: 1rem;
+    }
+}
