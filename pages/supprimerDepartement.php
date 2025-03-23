@@ -1,7 +1,7 @@
 <main class="content">
     <section id="supprimer-departement">
         <div class="supprimer-container">
-            <h1 class="main-title">Supprimer D&eacute;partement</h1>
+            <h1 class="main-title">Supprimer Département</h1>
             
             <?php if(isset($_GET['erreur'])): ?>
                 <div class="erreur-message">

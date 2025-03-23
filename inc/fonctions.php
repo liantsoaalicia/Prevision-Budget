@@ -28,6 +28,16 @@
 
         return "Identifiant incorrect";
     }
+
+    function getDepartementById($id) {
+        $con = dbConnect();
+        $query = "SELECT nom FROM departement WHERE idDepartement = :id";
+        $stmt = $con->prepare($query);
+        $stmt->bindParam('idDepartement', $idDepartement, PDO::PARAM_INT);
+        $stmt->execute();
+        $departement = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $departement;
+    }
     
     function listerDepartements() {
         try {

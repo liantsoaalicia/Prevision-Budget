@@ -5,12 +5,13 @@
     }
     $page = $page.".php";
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion Budg&eacute;taire</title>
+    <title>Gestion Budgétaire</title>
     <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -18,24 +19,24 @@
         <nav class="main-nav">
             <ul>
                 <li class="dropdown">
-                    <button class="dropbtn">D&eacute;partements</button>
+                    <button class="dropbtn">Départements</button>
                     <div class="dropdown-content">
-                        <a href="template.php?page=listeDepartement">Liste des d&eacute;partements</a>
-                        <a href="#ajout-departement">Ajouter d&eacute;partement</a>
-                        <a href="#budget-departement">Voir budget d&eacute;partement</a>
+                        <a href="template.php?page=listeDepartement">Liste des départements</a>
+                        <a href="#ajout-departement">Ajouter département</a>
+                        <a href="#budget-departement">Voir budget département</a>
                     </div>
                 </li>
                 <li class="dropdown">
-                    <button class="dropbtn">Cat&eacute;gories</button>
+                    <button class="dropbtn">Catégories</button>
                     <div class="dropdown-content">
-                        <a href="template.php?page=listeCategorie">Liste des cat&eacute;gories</a>
-                        <a href="#ajout-categorie">Ajouter cat&eacute;gorie</a>
+                        <a href="template.php?page=listeCategorie">Liste des catégories</a>
+                        <a href="template.php?page=ajout-categorie">Ajouter catégorie</a>
                     </div>
                 </li>
                 <li class="dropdown">
                     <button class="dropbtn">Budget</button>
                     <div class="dropdown-content">
-                        <a href="#previsions">Ajouter pr&eacute;vision</a>
+                        <a href="#previsions">Ajouter prévision</a>
                         <a href="#soldes">Voir soldes</a>
                         <a href="#budget-total">Voir budget total</a>
                     </div>

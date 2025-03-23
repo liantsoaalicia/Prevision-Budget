@@ -1,25 +1,36 @@
+:root {
+    --primary-color: #1A2A4F; /* Bleu nuit */
+    --secondary-color: #2C3E6F; /* Bleu clair */
+    --background-light: #FFFFFF; /* Blanc */
+    --background-gray: #F5F5F5; /* Gris clair */
+    --border-color: #E0E0E0; /* Gris moyen */
+    --text-dark: #1A2A4F; /* Bleu nuit pour le texte */
+    --text-light: #FFFFFF; /* Blanc pour le texte */
+    --text-gray: #9E9E9E; /* Gris foncé */
+}
+
 .formulaire-login {
     max-width: 400px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #F7F7F7;
+    background-color: var(--background-light);
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(128, 128, 128, 0.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     font-family: Arial, sans-serif;
 }
 
 .formulaire-login h3 {
-    color: #FF4444;
+    color: var(--primary-color);
     margin-bottom: 20px;
     padding: 10px;
-    background-color: #FFE6E6;
+    background-color: var(--background-gray);
     border-radius: 4px;
 }
 
 .formulaire-login label {
     display: block;
     margin-bottom: 15px;
-    color: #666;
+    color: var(--primary-color);
 }
 
 .formulaire-login select,
@@ -27,23 +38,23 @@
     width: 100%;
     padding: 8px;
     margin-top: 5px;
-    border: 1px solid #DADADA;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
-    background-color: #FFFFFF;
+    background-color: var(--background-light);
     transition: border-color 0.3s ease;
 }
 
 .formulaire-login select:focus,
 .formulaire-login input[type="password"]:focus {
-    border-color: #999;
+    border-color: var(--primary-color);
     outline: none;
 }
 
 .formulaire-login button {
     width: 100%;
     padding: 10px;
-    background-color: #666;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--text-light);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -51,5 +62,5 @@
 }
 
 .formulaire-login button:hover {
-    background-color: #555;
+    background-color: var(--secondary-color);
 }
