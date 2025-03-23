@@ -1,4 +1,5 @@
 <section id="ajout-categorie">
+<h1 class="main-title">Ajout catégorie</h1>
     <form action="traitement-ajout-categorie.php" method="POST">
         <div>
             <label for="categorie">Catégorie :</label>
@@ -9,8 +10,8 @@
         </div>
 
         <div>
-            <label for="types">Types :</label>
-            <input type="text" id="types" name="types" required>
+            <label for="type">Type :</label>
+            <input type="text" id="type" name="type" required>
         </div>
 
         <div>
@@ -20,4 +21,12 @@
 
         <button type="submit">Ajouter</button>
     </form>
+
+    <?php if(isset($_GET['success'])) { ?>
+        <h3 style="color: green;"><?= $_GET['success'] ?></h3>
+    <?php } ?>
+
+    <?php if(isset($_GET['erreur'])) { ?>
+        <h3 style="color: red;"><?= $_GET['erreur'] ?></h3>
+    <?php } ?>
 </section>

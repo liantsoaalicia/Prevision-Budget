@@ -10,7 +10,6 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Types</th>
                         <th>Nature</th>
                         <th>Actions</th>
@@ -24,7 +23,6 @@
 
                     foreach ($depenses as $depense) {
                         echo '<tr>';
-                        echo '<td>' . $depense['idCategorie'] . '</td>';
                         echo '<td>' . htmlspecialchars($depense['types']) . '</td>';
                         echo '<td>' . htmlspecialchars($depense['nature']) . '</td>';
                         echo '<td class="actions">';
@@ -42,13 +40,14 @@
             </table>
         </div>
 
+        <br>
+
         <!-- Affichage des Recettes -->
         <h2>Recettes</h2>
         <div class="categories-table">
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Types</th>
                         <th>Nature</th>
                         <th>Actions</th>
@@ -60,7 +59,6 @@
 
                     foreach ($recettes as $recette) {
                         echo '<tr>';
-                        echo '<td>' . $recette['idCategorie'] . '</td>';
                         echo '<td>' . htmlspecialchars($recette['types']) . '</td>';
                         echo '<td>' . htmlspecialchars($recette['nature']) . '</td>';
                         echo '<td class="actions">';

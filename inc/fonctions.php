@@ -111,5 +111,18 @@
         ];
     }
     
+    function insertCategorie($categorie, $types, $nature) {
+        $con = dbConnect();
+        $query = "INSERT INTO categorie (categorie, types, nature) VALUES (:categorie, :types, :nature)";
+        $stmt = $con->prepare($query);
 
+        $stmt->bindParam(':categorie', $categorie, PDO::PARAM_STR);
+        $stmt->bindParam(':types', $types, PDO::PARAM_STR);
+        $stmt->bindParam(':nature', $nature, PDO::PARAM_STR);
+        if ($stmt->execute()) {
+            return true; 
+        } else {
+            return false; 
+        }
+    }
 ?>

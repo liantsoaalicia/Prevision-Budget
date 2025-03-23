@@ -12,7 +12,6 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Nom</th>
                             <th>Actions</th>
                         </tr>
@@ -22,7 +21,6 @@
                         $departements = listerDepartements();
                         foreach ($departements as $departement) {
                             echo '<tr>';
-                            echo '<td>' . $departement['idDepartement'] . '</td>';
                             echo '<td>' . $departement['nom'] . '</td>';
                             echo '<td class="actions">';
                             echo '<a href="template.php?page=modifierDepartement&id=' . $departement['idDepartement'] . '" class="icones">';
