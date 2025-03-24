@@ -1,13 +1,14 @@
 <?php
-
-    include('../inc/fonctions.php');
-    $idDepartement = $_POST['idDepartement'];
-    $idPeriode = $_POST['idPerode'];
+    session_start();
+    include('../inc/fonctionRandie.php');
+    $idDepartement = $_SESSION['id'];
+    $idPeriode = $_POST['idPeriode'];
     $idCategorie = $_POST['idCategorie'];
-    $montant = $_POST['montant'];
+    $prevision = $_POST['prevision'];
+    $realisation = $_POST['realisation'];
     $valide = 0;
 
-    $success = ajoutPrevision($idDepartement, $idPeriode, $idCategorie, $montant, $valide);
+    $success = ajoutPrevision($idDepartement, $idPeriode, $idCategorie, $prevision, $realisation, $valide);
     if($success) {
         header('Location:template.php?page=ajout-prevision&success=Prevision ajoutée avec succès');
         exit();

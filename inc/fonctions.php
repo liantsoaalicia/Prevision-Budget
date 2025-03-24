@@ -147,4 +147,24 @@
             return true;
         } return false;
     }
+
+    // ceux qui ont ete valide 
+    function getPrevisionDepartement($idDepartement) {
+        $con = dbConnect();
+
+        $query = "SELECT p.idPrevision, p.prevision, p.realisation, p.valide,
+        d.nom AS nom_departement, per.nom AS nom_periode, per.dateDebut, per.dateFin,
+        c.categorie, c.types, c.nature FROM prevision p JOIN 
+        departement d ON p.idDepartement = d.idDepartement JOIN 
+        periode per ON p.idPeriode = per.idPeriode JOIN 
+        categorie c ON p.idCategorie = c.idCategorie WHERE p.idDepartement = :idDepartement 
+        AND p.valide = 1";
+
+        $stmt = $con->prepare($query);
+        $stmt->bindParam(':idDepartement', $idDepartement, PDO::PARAM_INT);
+        $stmt->execute();
+        $departements = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $departements;
+    }
+
 ?>

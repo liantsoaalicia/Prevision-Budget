@@ -1,12 +1,12 @@
 <?php
     include("connection.php");
 
-    function ajoutPrevision($idDepartement, $idPeriode, $idCategorie, $montant, $valide){
+    function ajoutPrevision($idDepartement, $idPeriode, $idCategorie, $prevision, $realisation, $valide){
         $con = dbConnect();
-        $query = "INSERT INTO prevision (idDepartement, idPeriode, idCategorie, montant, valide) VALUES (?, ?, ?, ?, ?)";
+        $query = "INSERT INTO prevision (idDepartement, idPeriode, idCategorie, prevision, realisation, valide) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $con->prepare($query);
 
-        if ($stmt->execute([$idDepartement, $idPeriode, $idCategorie, $montant, $valide])) {
+        if ($stmt->execute([$idDepartement, $idPeriode, $idCategorie, $prevision, $realisation, $valide])) {
             return true; 
         } else {
             return false; 

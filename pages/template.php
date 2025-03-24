@@ -32,7 +32,7 @@
                     <div class="dropdown-content">
                         <a href="template.php?page=listeDepartement">Liste des départements</a>
                         <a href="template.php?page=ajout-departement">Ajouter département</a>
-                        <a href="#budget-departement">Voir budget département</a>
+                        <a href="template.php?page=budget-departement">Voir budget département</a>
                     </div>
                 </li>
                 <li class="dropdown">
