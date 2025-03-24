@@ -1,22 +1,22 @@
 <section id="menu-description">
-    <h1 class="main-title">Gestion Budg&eacute;taire</h1>
+    <h1 class="main-title">Gestion Budgétaire</h1>
     <div class="menu-sections">
-        <!-- D&eacute;partements -->
+        <!-- Départements -->
         <div class="menu-item">
-            <h3>D&eacute;partements</h3>
-            <p>Gestion complète des d&eacute;partements : liste, ajout, budget et suivi des activit&eacute;s.</p>
+            <h3>Départements</h3>
+            <p>Gestion complète des départements : liste, ajout, budget et suivi des activités.</p>
         </div>
         
-        <!-- Cat&eacute;gories -->
+        <!-- Catégories -->
         <div class="menu-item">
-            <h3>Cat&eacute;gories</h3>
-            <p>Organisation et classification des cat&eacute;gories pour un suivi efficace.</p>
+            <h3>Catégories</h3>
+            <p>Organisation et classification des catégories pour un suivi efficace.</p>
         </div>
         
         <!-- Budget -->
         <div class="menu-item">
             <h3>Budget</h3>
-            <p>Gestion des pr&eacute;visions, suivi des soldes et analyse du budget total.</p>
+            <p>Gestion des prévisions, suivi des soldes et analyse du budget total.</p>
         </div>
     </div>
 </section>

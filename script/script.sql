@@ -38,7 +38,8 @@ CREATE TABLE prevision (
     idDepartement INT,
     idPeriode INT,
     idCategorie INT,
-    montant FLOAT,
+    prevision FLOAT,
+    realisation FLOAT,
     valide INT, -- 1: valide, 0: mbola tsy valide
     FOREIGN KEY (idDepartement) REFERENCES departement(idDepartement),
     FOREIGN KEY (idPeriode) REFERENCES periode(idPeriode),

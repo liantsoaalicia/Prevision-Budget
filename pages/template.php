@@ -23,10 +23,10 @@
     <header>
         <nav class="main-nav">
             <ul>
-            <div class="dept-connecte">
-                <span class="point-vert"></span>
-                <span class="nom-dept"><?= htmlspecialchars($nomDeptConnecte) ?></span>
-            </div>
+                <li class="dept-connecte">
+                    <span class="point-vert"></span>
+                    <span class="nom-dept"><?= htmlspecialchars($nomDeptConnecte) ?></span>
+                </li>
                 <li class="dropdown">
                     <button class="dropbtn">D&eacute;partements</button>
                     <div class="dropdown-content">
@@ -49,6 +49,11 @@
                         <a href="#soldes">Voir soldes</a>
                         <a href="#budget-total">Voir budget total</a>
                     </div>
+                </li>
+                <li class="dropdown">
+                    <form action="traitement-deconnection.php">
+                        <button class="dropbtn" type="submit">Deconnexion</button>
+                    </form>
                 </li>
             </ul>
         </nav>

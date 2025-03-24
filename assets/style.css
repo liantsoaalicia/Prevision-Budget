@@ -308,3 +308,29 @@ button:hover {
 .nom-dept {
     color: var(--text-light); 
 }
+
+/* Style pour le bouton de déconnexion */
+.deconnexion-li {
+    margin-left: auto; /* Pousse l'élément à droite */
+}
+
+.btn-deconnexion {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 15px;
+    background-color: #e74c3c;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn-deconnexion:hover {
+    background-color: #c0392b;
+}
+
+/* Si vous utilisez Font Awesome pour l'icône */
+.fas.fa-sign-out-alt {
+    font-size: 14px;
+}
