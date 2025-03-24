@@ -28,7 +28,7 @@
                 <span class="nom-dept"><?= htmlspecialchars($nomDeptConnecte) ?></span>
             </div>
                 <li class="dropdown">
-                    <button class="dropbtn">Départements</button>
+                    <button class="dropbtn">D&eacute;partements</button>
                     <div class="dropdown-content">
                         <a href="template.php?page=listeDepartement">Liste des départements</a>
                         <a href="template.php?page=ajout-departement">Ajouter département</a>
@@ -45,7 +45,7 @@
                 <li class="dropdown">
                     <button class="dropbtn">Budget</button>
                     <div class="dropdown-content">
-                        <a href="#previsions">Ajouter prévision</a>
+                        <a href="template.php?page=ajout-prevision">Ajouter pr&eacute;vision</a>
                         <a href="#soldes">Voir soldes</a>
                         <a href="#budget-total">Voir budget total</a>
                     </div>
