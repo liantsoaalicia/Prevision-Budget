@@ -9,7 +9,7 @@
 
 <section id="departements-budget">
     <div class="departements-container">
-    <h1 class="main-title">Budget des d&eacute;partements</h1>
+    <h1 class="main-title">Budget des départements</h1>
 
     <?php if($isItFinance) { 
         $allDepartements = getAllDepartements();
@@ -42,7 +42,7 @@
             <tr>
                 <th></th>
                 <?php foreach ($periodes as $periode): ?>
-                    <th>Pr&eacute;vision</th><th>R&eacute;alisation</th><th>Ecart</th>
+                    <th>Prévision</th><th>Réalisation</th><th>Ecart</th>
                 <?php endforeach; ?>
             </tr>
             

@@ -180,4 +180,8 @@
         }
     }
 
+    function getAllInvalidPrevision() {
+        
+    }
+
 ?>
