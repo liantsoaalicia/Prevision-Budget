@@ -152,7 +152,7 @@
     function getPrevisionDepartement($idDepartement) {
         $con = dbConnect();
 
-        $query = "SELECT p.idPrevision, p.prevision, p.realisation, p.valide,
+        $query = "SELECT p.idPrevision, p.idCategorie, p.idPeriode, p.prevision, p.realisation, p.valide,
         d.nom AS nom_departement, per.nom AS nom_periode, per.dateDebut, per.dateFin,
         c.categorie, c.types, c.nature FROM prevision p JOIN 
         departement d ON p.idDepartement = d.idDepartement JOIN 

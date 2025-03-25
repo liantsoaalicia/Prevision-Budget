@@ -5,6 +5,7 @@
     $periodes = getAllPeriodes();
     $categories = listerCategories();
     $previsions = getPrevisionDepartement($_SESSION['id']);
+    var_dump($previsions);
 ?>
 
 <section id="departements-budget">
@@ -55,8 +56,8 @@
                                 return $p['idCategorie'] == $cat['idCategorie'] && $p['idPeriode'] == $periode['idPeriode'];
                             });
                             $prev = reset($prev);
-                            $prevision = $prev['montantPrevision'] ?? 0;
-                            $realisation = $prev['montantRealisation'] ?? 0;
+                            $prevision = $prev['prevision'] ?? 0;
+                            $realisation = $prev['realisation'] ?? 0;
                             $ecart = $prevision - $realisation;
                         ?>
                         <td><?= number_format($prevision, 2) ?></td>
