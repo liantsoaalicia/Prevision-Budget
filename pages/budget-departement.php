@@ -71,7 +71,6 @@
 
             <?php foreach ($categories['recettes'] as $cat): ?>
                 <tr class="recette">
-                    <td><?= htmlspecialchars($cat['types'] . ' - ' . $cat['nature']) ?></td>
                     <?php foreach ($periodes as $periode): ?>
                         <?php
                             $prev = array_filter($previsions, function($p) use ($cat, $periode) {
@@ -82,9 +81,12 @@
                             $realisation = $prev['montantRealisation'] ?? 0;
                             $ecart = $prevision - $realisation;
                         ?>
-                        <td><?= number_format($prevision, 2) ?></td>
-                        <td><?= number_format($realisation, 2) ?></td>
-                        <td><?= number_format($ecart, 2) ?></td>
+                        <?php if($realisation!=0 && $realisation!=0){ ?>
+                            <td><?= htmlspecialchars($cat['types'] . ' - ' . $cat['nature']) ?></td>
+                            <td><?= number_format($prevision, 2) ?></td>
+                            <td><?= number_format($realisation, 2) ?></td>
+                            <td><?= number_format($ecart, 2) ?></td>
+                        <?php } ?>
                     <?php endforeach; ?>
                 </tr>
             <?php endforeach; ?>
