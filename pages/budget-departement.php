@@ -5,7 +5,7 @@
     $periodes = getAllPeriodes();
     $categories = listerCategories();
     $previsions = getPrevisionDepartement($_SESSION['id']);
-    var_dump($previsions);
+    //var_dump($previsions);
 ?>
 
 <section id="departements-budget">
@@ -33,6 +33,7 @@
             ?>
 
         <div class="budget-table">
+            <?php if(count($previsions)>0) { ?>
             <table border="1" class="table-budget">
             <tr>
                 <th>Rubrique</th>
@@ -49,7 +50,6 @@
             
             <?php foreach ($categories['depenses'] as $cat): ?>
                 <tr class="depense">
-                    <td><?= htmlspecialchars($cat['types'] . ' - ' . $cat['nature']) ?></td>
                     <?php foreach ($periodes as $periode): ?>
                         <?php
                             $prev = array_filter($previsions, function($p) use ($cat, $periode) {
@@ -59,10 +59,12 @@
                             $prevision = $prev['prevision'] ?? 0;
                             $realisation = $prev['realisation'] ?? 0;
                             $ecart = $prevision - $realisation;
-                        ?>
-                        <td><?= number_format($prevision, 2) ?></td>
-                        <td><?= number_format($realisation, 2) ?></td>
-                        <td><?= number_format($ecart, 2) ?></td>
+                            if($realisation!=0 && $realisation!=0){ ?>
+                                <td><?= htmlspecialchars($cat['types'] . ' - ' . $cat['nature']) ?></td>
+                                <td><?= number_format($prevision, 2) ?></td>
+                                <td><?= number_format($realisation, 2) ?></td>
+                                <td><?= number_format($ecart, 2) ?></td>
+                        <?php } ?>
                     <?php endforeach; ?>
                 </tr>
             <?php endforeach; ?>
@@ -88,6 +90,7 @@
             <?php endforeach; ?>
 
         </table>
+        <?php } ?>
         </div>
     <?php } ?>
     </div>
