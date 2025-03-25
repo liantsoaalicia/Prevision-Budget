@@ -32,7 +32,7 @@
 
     function getDepartementById($id) {
         $con = dbConnect();
-        $query = "SELECT nom FROM departement WHERE idDepartement = :id";
+        $query = "SELECT * FROM departement WHERE idDepartement = :id";
         $stmt = $con->prepare($query);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();

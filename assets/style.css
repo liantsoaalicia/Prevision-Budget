@@ -107,6 +107,8 @@ section {
     padding: 1rem;
     border: 1px solid var(--border-color);
     border-radius: 4px;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 h2 {
