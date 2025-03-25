@@ -181,7 +181,32 @@
     }
 
     function getAllInvalidPrevision() {
+        $con = dbConnect();
+        $query = "SELECT p.*, d.nom AS nom_departement, per.nom AS nom_periode,
+        c.categorie, c.types, c.nature FROM prevision p JOIN 
+        departement d ON p.idDepartement = d.idDepartement JOIN 
+        periode per ON p.idPeriode = per.idPeriode JOIN 
+        categorie c ON p.idCategorie = c.idCategorie WHERE p.valide = 0";
         
+        $stmt = $con->prepare($query);
+        $stmt->execute();
+        $allPrevisions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                
+        $depenses = [];
+        $recettes = [];
+        
+        foreach ($allPrevisions as $prev) {
+            if ($prev['categorie'] === 'Depense') {
+                $depenses[] = $prev;
+            } else {
+                $recettes[] = $prev;
+            }
+        }
+        
+        return [
+            'depenses' => $depenses,
+            'recettes' => $recettes
+        ];  
     }
 
 ?>
