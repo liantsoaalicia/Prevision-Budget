@@ -49,4 +49,13 @@
         $departements = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $departements;
     }
+
+    function getPrevisionById($idprevision) {
+        $con = dbConnect();
+        $query = "SELECT * FROM prevision WHERE idPrevision=?";
+        $stmt = $con->prepare($query);
+        $stmt->execute([$idprevision]);
+        $prevs = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $prevs;
+    }
 ?>
