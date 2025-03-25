@@ -167,4 +167,17 @@
         return $departements;
     }
 
+    function validerPrevision($idPrevision) {
+        $con = dbConnect();
+        $query = "UPDATE prevision SET valide = 1 WHERE idPrevision = :id";
+        $stmt = $con->prepare($query);
+        $stmt->bindParam(':id', $idPrevision, PDO::PARAM_INT);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            return true; 
+        } else {
+            return false; 
+        }
+    }
+
 ?>
