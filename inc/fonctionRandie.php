@@ -58,4 +58,17 @@
         $prevs = $stmt->fetch(PDO::FETCH_ASSOC);
         return $prevs;
     }
+
+    function getTotalCatgByDept($categorie, $prev_or_realisation, $idDept){
+        $con = dbConnect();
+        $montant = "prevision";
+        if($prev_or_realisation=="r"){
+            $montant = "realisation";
+        }
+        $query = "SELECT SUM(?) as total FROM prevision p JOIN categorie c ON c.idCategorie=p.idCategorie WHERE idDepartement=? AND c.categorie=?";
+        $stmt = $con->prepare($query);
+        $stmt->execute([$montant, $idDept, $categorie]);
+        $tot = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $tot;
+    }
 ?>
