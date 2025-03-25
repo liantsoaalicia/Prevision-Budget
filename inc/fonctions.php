@@ -209,4 +209,18 @@
         ];  
     }
 
+    function insertSoldes($idDepartement, $soldeDebut) {
+        $con = dbConnect();
+        $query = "INSERT INTO solde (idDepartement, soldeDebut) VALUES (:id, :debut)";
+        $stmt = $con->prepare($query);
+
+        $stmt->bindParam(':id', $idDepartement, PDO::PARAM_INT);
+        $stmt->bindParam(':solde', $soldeDebut, PDO::PARAM_STR);
+        if ($stmt->execute()) {
+            return true; 
+        } else {
+            return false; 
+        }
+    }
+
 ?>
