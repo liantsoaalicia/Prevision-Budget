@@ -53,7 +53,8 @@
 
 <section id="import-prevision">
     <h2>Importer un fichier CSV</h2>
-    <form action="traitement-importcsv-prevision.php" method="post">
-        <input type="file" name="csvFile">
+    <form action="traitement-importcsv-prevision.php" method="post" enctype="multipart/form-data">
+        <input type="file" name="csvFile" id="csv">
+        <p><button type="submit">Importer</button></p>
     </form>
 </section>
