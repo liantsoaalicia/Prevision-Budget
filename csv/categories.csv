@@ -1,0 +1,18 @@
+categorie;types;nature
+Recette;Subvention;Aide de l'Etat
+Recette;Facturation de services;Prestation administrative
+Recette;Intérêts;Revenus des placements financiers
+Recette;Remboursement de frais;Dépenses avancées récupérées
+Recette;Vente de matériel;Matériel usagé vendu
+Recette;Service de réparation;Maintenance facturée aux clients
+Depense;Achat;Fournitures de bureau
+Depense;Salaire;Rémunération du personnel
+Depense;Frais financiers;Intérêts sur emprunts
+Depense;Services bancaires;Frais de gestion bancaire
+Depense;Achat;Pièces détachées
+Depense;Entretien;Réparation des équipements
+Depense;Reparation;Reparation d'un moteur electrique
+Depense;Depannage;Depannage d'un circuit electrique
+Recette;Vente de biens et services;Vente de materiels bureautique
+Recette;Vente de biens et services;Vente de services administratifs
+Recette;Subventions et aides;Aide financière pour un projet spécifique

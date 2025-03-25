@@ -30,3 +30,11 @@
         <h3 style="color: red;"><?= $_GET['erreur'] ?></h3>
     <?php } ?>
 </section>
+
+<section id="import-categorie">
+    <h2>Importer un fichier CSV</h2>
+    <form action="traitement-importcsv-categorie.php" method="post" enctype="multipart/form-data">
+        <input type="file" name="csvFile" id="csv">
+        <p><button type="submit">Importer</button></p>
+    </form>
+</section>

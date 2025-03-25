@@ -36,6 +36,23 @@
             
             <button type="submit">Se connecter</button>
         </form>
-    </div> 
+     
+
+    <div class="importcsv-departement">
+        <h2>Importer un fichier CSV</h2>
+        <form action="traitement-importcsv-dpt.php" method="post" enctype="multipart/form-data">
+            <input type="file" name="csvFile" id="csv">
+            <p><button type="submit">Importer</button></p>
+        </form>
+        <?php if(isset($_GET['success'])) { ?>
+            <h3 style="color: green;"><?= $_GET['success'] ?></h3>
+        <?php } ?>
+
+        <?php if(isset($_GET['erreur'])) { ?>
+            <h3 style="color: red;"><?= $_GET['erreur'] ?></h3>
+        <?php } ?>
+    </div>
+
+    </div>
 </body>
 </html>
