@@ -9,6 +9,7 @@
 
     $deptConnecte = getDepartementById($_SESSION['id']);
     $nomDeptConnecte = $deptConnecte['nom'];
+    $isItFinance = verifyIfFinance($_SESSION['id']);
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +29,7 @@
                     <span class="nom-dept"><?= htmlspecialchars($nomDeptConnecte) ?></span>
                 </li>
                 <li class="dropdown">
-                    <button class="dropbtn">D&eacute;partements</button>
+                    <button class="dropbtn">Départements</button>
                     <div class="dropdown-content">
                         <a href="template.php?page=listeDepartement">Liste des départements</a>
                         <a href="template.php?page=ajout-departement">Ajouter département</a>
@@ -45,9 +46,12 @@
                 <li class="dropdown">
                     <button class="dropbtn">Budget</button>
                     <div class="dropdown-content">
-                        <a href="template.php?page=ajout-prevision">Ajouter pr&eacute;vision</a>
+                        <a href="template.php?page=ajout-prevision">Ajouter prévision</a>
                         <a href="#soldes">Voir soldes</a>
                         <a href="#budget-total">Voir budget total</a>
+                        <?php if($isItFinance) { ?>
+                            <a href="template.php?page=">Valider les previsions</a>
+                        <?php } ?>
                     </div>
                 </li>
                 <li class="dropdown">
