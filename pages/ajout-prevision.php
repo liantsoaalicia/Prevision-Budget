@@ -27,7 +27,7 @@
                 </optgroup>
                 <optgroup label="Recette">
                     <?php foreach($categories['recettes'] as $recette) { ?>
-                        <option value="<?= $recette['idCategorie'] ?>"><?= $recette['types']?> - <?= $depense['nature'] ?></option>
+                        <option value="<?= $recette['idCategorie'] ?>"><?= $recette['types']?> - <?= $recette['nature'] ?></option>
                     <?php } ?>
                 </optgroup>
             </select>
