@@ -207,4 +207,28 @@
         
         return $soldeDebut + $totalRecette - $totalDepense;
     }
+
+    function getCtgDept($idDepartement){
+        $con = dbConnect();
+        $query = "SELECT c.* FROM prevision p JOIN categorie c ON c.idCategorie=p.idCategorie WHERE p.idDepartement=?";
+        $stmt = $con->prepare($query);
+        $stmt->execute([$idDepartement]);
+        $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $depenses = [];
+        $recettes = [];
+
+        foreach ($categories as $categorie) {
+            if ($categorie['categorie'] == 'Depense') {
+                $depenses[] = $categorie;
+            } elseif ($categorie['categorie'] == 'Recette') {
+                $recettes[] = $categorie;
+            }
+        }
+
+        return [
+            'depenses' => $depenses,
+            'recettes' => $recettes
+        ];
+    }
 ?>

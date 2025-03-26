@@ -18,6 +18,7 @@
     <?php foreach($allDepartements as $d) { ?>
             <h2><?= $d['nom'] ?></h2>
             <?php $previsions = getPrevisionDepartement($d['idDepartement']); 
+            $categories = getCtgDept($d['idDepartement']);
             $data = [];
 
             foreach($previsions as $p) {
@@ -34,6 +35,11 @@
 
         <div class="budget-table">
             <?php if(count($previsions)>0) { ?>
+                <!--<div class="pdf-actions">
+                    <button onclick="exportBudgetPDF('<?= $d['idDepartement'] ?>')" class="btn-export-pdf">
+                        Exporter en PDF
+                    </button>
+                </div>-->
             <table border="1" class="table-budget">
             <tr>
                 <th>Rubrique</th>
@@ -131,3 +137,8 @@
     <?php } ?>
     </div>
 </section>
+<!--<script>
+    function exportBudgetPDF(departementId) {
+        window.location.href = 'export-budget.php?idDepartement=' + departementId;
+    }
+</script>-->

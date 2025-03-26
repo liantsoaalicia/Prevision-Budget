@@ -215,7 +215,7 @@
         $stmt = $con->prepare($query);
 
         $stmt->bindParam(':id', $idDepartement, PDO::PARAM_INT);
-        $stmt->bindParam(':solde', $soldeDebut, PDO::PARAM_STR);
+        $stmt->bindParam(':debut', $soldeDebut, PDO::PARAM_STR);
         if ($stmt->execute()) {
             return true; 
         } else {
