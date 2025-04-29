@@ -1,6 +1,7 @@
 <?php
     //include("connection.php");
     include("fonctionRandie.php");
+    include("fonctionProduit.php");
 
     function getAllDepartements() {
         $con = dbConnect();

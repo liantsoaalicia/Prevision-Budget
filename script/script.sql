@@ -72,7 +72,7 @@ CREATE TABLE clients (
     email VARCHAR(255) UNIQUE,
     age INT,
     sexe enum("Homme", "Femme"),
-    classe enum ("eleve", "moyen", "bas")
+    classe enum ("eleve", "moyen", "bas"),
     dateInscription DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -87,7 +87,7 @@ CREATE TABLE produits (
     description TEXT,
     idCategorie INT, 
     prix DECIMAL(10,2),
-    quantiteStock INT
+    quantiteStock INT,
     FOREIGN KEY (idCategorie) REFERENCES categorieProduit(idCategorie)
 );
 
@@ -124,7 +124,7 @@ CREATE TABLE actionsCrm (
     FOREIGN KEY (idClient) REFERENCES clients(idClient)
 );
 
-CREATE TABLE reactionActionCrm(
+CREATE TABLE reactionActionCrm (
     idReaction INT AUTO_INCREMENT PRIMARY KEY,
     idClient INT,
     reaction enum("tsara", "ratsy"),
@@ -136,7 +136,7 @@ CREATE TABLE retoursClients (
     idClient INT,
     idCommande INT,
     dateRetour DATETIME DEFAULT CURRENT_TIMESTAMP,
-    avis enum("tsara", "ratsy")
+    avis enum("tsara", "ratsy"),
     commentaire TEXT,
     FOREIGN KEY (idClient) REFERENCES clients(idClient),
     FOREIGN KEY (idCommande) REFERENCES commandes(idCommande)
