@@ -1,19 +1,4 @@
 DROP DATABASE PrevisionBudget;
-
-DROP TABLE solde;
-DROP TABLE prevision;
-DROP TABLE categorie;
-DROP TABLE periode;
-DROP TABLE departement;
-DROP TABLE clients
-DROP TABLE categorieProduit
-DROP TABLE produits
-DROP TABLE commandes
-DROP TABLE ligneCommandes
-DROP TABLE actionsCrm
-DROP TABLE reactionActionCrm
-DROP TABLE retoursClients
-
 CREATE DATABASE PrevisionBudget;
 USE PrevisionBudget;
 
@@ -79,7 +64,7 @@ CREATE TABLE clients (
 CREATE TABLE categorieProduit(
     idCategorie INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(255)
-)
+);
 -- 2. Table des produits
 CREATE TABLE produits (
     idProduit INT AUTO_INCREMENT PRIMARY KEY,
@@ -141,3 +126,18 @@ CREATE TABLE retoursClients (
     FOREIGN KEY (idClient) REFERENCES clients(idClient),
     FOREIGN KEY (idCommande) REFERENCES commandes(idCommande)
 );
+
+
+DROP TABLE solde;
+DROP TABLE prevision;
+DROP TABLE categorie;
+DROP TABLE periode;
+DROP TABLE departement;
+DROP TABLE clients
+DROP TABLE categorieProduit
+DROP TABLE produits
+DROP TABLE commandes
+DROP TABLE ligneCommandes
+DROP TABLE actionsCrm
+DROP TABLE reactionActionCrm
+DROP TABLE retoursClients
