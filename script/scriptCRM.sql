@@ -1,3 +1,4 @@
+
 -- 1. Table des clients
 CREATE TABLE clients (
     idClient INT AUTO_INCREMENT PRIMARY KEY,
@@ -58,6 +59,12 @@ CREATE TABLE actionsCrm (
     FOREIGN KEY (idClient) REFERENCES clients(idClient)
 );
 
+CREATE TABLE reactionActionCrm(
+    idReaction INT AUTO_INCREMENT PRIMARY KEY,
+    idClient INT,
+    reaction enum("tsara", "ratsy"),
+    FOREIGN KEY (idClient) REFERENCES clients(idClient)
+);
 -- 7. Table des retours clients (Apres)
 CREATE TABLE retoursClients (
     idRetour INT AUTO_INCREMENT PRIMARY KEY,
