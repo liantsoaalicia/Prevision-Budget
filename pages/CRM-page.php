@@ -29,35 +29,28 @@
                     <span class="nom-dept"><?= htmlspecialchars($nomDeptConnecte) ?></span>
                 </li>
                 <li class="dropdown">
-                    <button class="dropbtn">Départements</button>
+                    <button class="dropbtn">Client</button>
                     <div class="dropdown-content">
-                        <a href="template.php?page=listeDepartement">Liste des départements</a>
-                        <a href="template.php?page=ajout-departement">Ajouter département</a>
-                        <a href="template.php?page=budget-departement">Voir budget département</a>
+                        <a href="CRM-page.php?page=ajout-client">Ajouter Client</a>
+                        <a href="CRM-page.php?page=ajout-reaction-crm">Reaction CRM</a>
+                        <a href="CRM-page.php?page=ajout-retour-client">Retour Client</a>
                     </div>
                 </li>
                 <li class="dropdown">
-                    <button class="dropbtn">Catégories</button>
+                    <button class="dropbtn">Produit</button>
                     <div class="dropdown-content">
-                        <a href="template.php?page=listeCategorie">Liste des catégories</a>
-                        <a href="template.php?page=ajout-categorie">Ajouter catégorie</a>
+                        <a href="CRM-page.php?page=ajout-categorie-produit">Ajouter Catégorie Produit</a>
+                        <a href="CRM-page.php?page=ajout-produit">Ajouter Produit</a>
                     </div>
                 </li>
                 <li class="dropdown">
-                    <button class="dropbtn">Budget</button>
+                    <button class="dropbtn">Commande</button>
                     <div class="dropdown-content">
-                        <a href="template.php?page=ajout-prevision">Ajouter prévision</a>
-                        <a href="template.php?page=soldes">Voir soldes</a>
-                        <a href="#budget-total">Voir budget total</a>
+                        <a href="CRM-page.php?page=ajout-commande">Ajouter Commande</a>
                         <?php if($isItFinance) { ?>
-                            <a href="template.php?page=valider-prevision">Valider les previsions</a>
+                            <a href="CRM-page.php?page=valider-prevision">Valider les previsions</a>
                         <?php } ?>
                     </div>
-                </li>
-                <li class="dropdown">
-                    <form action="CRM-page.php">
-                        <button class="dropbtn">CRM</button>
-                    </form>
                 </li>
                 <li class="dropdown">
                     <form action="traitement-deconnection.php">

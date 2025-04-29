@@ -1,3 +1,4 @@
+
 -- 1. Table des clients
 CREATE TABLE clients (
     idClient INT AUTO_INCREMENT PRIMARY KEY,
@@ -10,7 +11,7 @@ CREATE TABLE clients (
     dateInscription DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE categorie_crm (
+CREATE TABLE categorieClient (
     idCategorie INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(255)
 )
@@ -22,7 +23,7 @@ CREATE TABLE produits (
     idCategorie INT, 
     prix DECIMAL(10,2),
     quantiteStock INT
-    FOREIGN KEY (idCategorie) REFERENCES categorie_crm(idCategorie)
+    FOREIGN KEY (idCategorie) REFERENCES categorieClient(idCategorie)
 );
 
 -- 3. Table des commandes
@@ -58,6 +59,12 @@ CREATE TABLE actionsCrm (
     FOREIGN KEY (idClient) REFERENCES clients(idClient)
 );
 
+CREATE TABLE reactionActionCrm(
+    idReaction INT AUTO_INCREMENT PRIMARY KEY,
+    idClient INT,
+    reaction enum("tsara", "ratsy"),
+    FOREIGN KEY (idClient) REFERENCES clients(idClient)
+);
 -- 7. Table des retours clients (Apres)
 CREATE TABLE retoursClients (
     idRetour INT AUTO_INCREMENT PRIMARY KEY,
