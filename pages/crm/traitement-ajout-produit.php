@@ -7,7 +7,7 @@
     $prix = $_POST['prix'];
     $quantite = $_POST['quantite'];
 
-    $success = insertProduit($nom, $desc, $idcategorie, $prix, $qte);
+    $success = insertProduit($nom, $desc, $idcategorie, $prix, $quantite);
     if($success) {
         header('Location: ../CRM-page.php?page=crm/ajout-produit&success=Produit ajouté avec succès');
         exit();

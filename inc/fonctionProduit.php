@@ -23,7 +23,7 @@
         $stmt->bindParam(':desc', $desc, PDO::PARAM_STR);
         $stmt->bindParam(':idcategorie', $idcategorie, PDO::PARAM_INT);
         $stmt->bindParam(':prix', $prix, PDO::PARAM_STR);
-        $stmt->bindParam(':qt', $qte, PDO::PARAM_STR);
+        $stmt->bindParam(':qt', $qte, PDO::PARAM_INT);
 
         if($stmt->execute()) {
             return true;
