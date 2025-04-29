@@ -137,8 +137,3 @@
     <?php } ?>
     </div>
 </section>
-<!--<script>
-    function exportBudgetPDF(departementId) {
-        window.location.href = 'export-budget.php?idDepartement=' + departementId;
-    }
-</script>-->

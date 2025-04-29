@@ -2,7 +2,6 @@
     <div class="categories-container">
         <h1 class="main-title">Liste des Catégories</h1>
 
-        <!-- Affichage des Dépenses -->
         <h2>Dépenses</h2>
         <div class="categories-table">
             <table>
@@ -15,7 +14,6 @@
                 </thead>
                 <tbody>
                     <?php
-                    // Récupérer les catégories séparées
                     $categories = listerCategories();
                     $depenses = $categories['depenses'];
 
@@ -40,7 +38,6 @@
 
         <br>
 
-        <!-- Affichage des Recettes -->
         <h2>Recettes</h2>
         <div class="categories-table">
             <table>

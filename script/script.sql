@@ -53,3 +53,24 @@ CREATE TABLE solde (
     soldeFin FLOAT,
     FOREIGN KEY (idDepartement) REFERENCES departement(idDepartement)
 );
+
+-- CRM
+CREATE TABLE categorie_produit (
+    idCategorie INT AUTO_INCREMENT PRIMARY KEY,
+    categorie VARCHAR(100)
+);
+
+CREATE TABLE produit (
+    idProduit INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100),
+    idCategorie INT REFERENCES categorie_produit(idCategorie),
+    prix FLOAT
+);
+
+CREATE TABLE client (
+    idClient INT AUTO_INCREMENT PRIMARY KEY,
+    sexe ENUM('Homme', 'Femme'),
+    age INT,
+    classe ENUM('Elevee', 'Moyenne', 'Basse'),
+    
+);
