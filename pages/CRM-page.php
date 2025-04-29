@@ -32,16 +32,16 @@
                 <li class="dropdown">
                     <button class="dropbtn">Client</button>
                     <div class="dropdown-content">
-                        <a href="CRM-page.php?page=ajout-client">Ajouter Client</a>
-                        <a href="CRM-page.php?page=ajout-reaction-crm">Reaction CRM</a>
-                        <a href="CRM-page.php?page=ajout-retour-client">Retour Client</a>
+                        <a href="CRM-page.php?page=crm/ajout-client">Ajouter Client</a>
+                        <a href="CRM-page.php?page=crm/ajout-reaction-crm">Reaction CRM</a>
+                        <a href="CRM-page.php?page=crm/ajout-retour-client">Retour Client</a>
                     </div>
                 </li>
                 <li class="dropdown">
                     <button class="dropbtn">Produit</button>
                     <div class="dropdown-content">
-                        <a href="CRM-page.php?page=ajout-categorie-produit">Ajouter Catégorie Produit</a>
-                        <a href="CRM-page.php?page=ajout-produit">Ajouter Produit</a>
+                        <a href="CRM-page.php?page=crm/ajout-categorie-produit">Ajouter Catégorie Produit</a>
+                        <a href="CRM-page.php?page=crm/ajout-produit">Ajouter Produit</a>
                     </div>
                 </li>
                 <li class="dropdown">

@@ -14,15 +14,6 @@
         }
     }
 
-    function getAllCategorieProduit() {
-        $con = dbConnect();
-        $query = "SELECT * FROM categorieProduit";
-        $stmt = $con->prepare($query);
-        $stmt->execute();
-        $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $categories;
-    }
-
     function insertProduit($nom ,$desc, $idcategorie, $prix, $qte) {
         $con = dbConnect();
         $query = "INSERT INTO produits(nom, description, idCategorie, prix, quantiteStock) VALUES 

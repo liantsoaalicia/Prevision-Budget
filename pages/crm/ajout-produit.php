@@ -4,7 +4,7 @@
 
 <section id="ajout-produit">
     <h1 class="main-title">Ajout de produits</h1>
-    <form action="traitement-ajout-produit.php" method="post">
+    <form action="crm/traitement-ajout-produit.php" method="post">
         <div>
             <label for="nom">Nom : </label>
             <input type="text" name="nom" id="nom" required>
@@ -26,7 +26,7 @@
             <input type="number" name="prix" id="prix">
         </div>
         <div>
-            <label for="quantite">Quantite</label>
+            <label for="quantite">Quantite en stock : </label>
             <input type="number" name="quantite" id="quantite">
         </div>
         <button type="submit">Ajouter</button>

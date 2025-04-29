@@ -1,7 +1,6 @@
 <?php
     //include("connection.php");
     include("fonctionRandie.php");
-    include("fonctionProduit.php");
 
     function getAllDepartements() {
         $con = dbConnect();
@@ -222,6 +221,15 @@
         } else {
             return false; 
         }
+    }
+
+    function getAllCategorieProduit() {
+        $con = dbConnect();
+        $query = "SELECT * FROM categorieProduit";
+        $stmt = $con->prepare($query);
+        $stmt->execute();
+        $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $categories;
     }
 
 ?>

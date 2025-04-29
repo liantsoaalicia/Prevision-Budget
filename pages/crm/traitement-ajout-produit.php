@@ -1,5 +1,5 @@
 <?php 
-    include('../inc/fonctionProduit.php');
+    include('../../inc/fonctionProduit.php');
 
     $nom = $_POST['nom'];
     $desc = $_POST['desc'];
@@ -9,10 +9,10 @@
 
     $success = insertProduit($nom, $desc, $idcategorie, $prix, $qte);
     if($success) {
-        header('Location: CRM-page.php?page=crm/ajout-produit&success=Produit ajouté avec succès');
+        header('Location: ../CRM-page.php?page=crm/ajout-produit&success=Produit ajouté avec succès');
         exit();
     } else {
-        header('Location: CRM-page.php?page=crm/ajout-produit&erreur=Erreur lors de l\'ajout du produit');
+        header('Location: ../CRM-page.php?page=crm/ajout-produit&erreur=Erreur lors de l\'ajout du produit');
         exit();
     }
 
