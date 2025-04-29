@@ -64,27 +64,8 @@ CREATE TABLE retoursClients (
     idClient INT,
     idCommande INT,
     dateRetour DATETIME DEFAULT CURRENT_TIMESTAMP,
-    avis
+    avis enum("tsara", "ratsy")
     commentaire TEXT,
     FOREIGN KEY (idClient) REFERENCES clients(idClient),
     FOREIGN KEY (idCommande) REFERENCES commandes(idCommande)
-);
-
--- 8. Table des campagnes marketing (Avant)
-CREATE TABLE campagnesMarketing (
-    idCampagne INT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(255),
-    type VARCHAR(100),                   -- Exemple : Email, ReseauxSociaux, Salon
-    dateDebut DATE,
-    dateFin DATE,
-    budget DECIMAL(10,2)
-);
-
--- 9. Table de liaison campagne-client
-CREATE TABLE campagneClients (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    idCampagne INT,
-    idClient INT,
-    FOREIGN KEY (idCampagne) REFERENCES campagnesMarketing(idCampagne),
-    FOREIGN KEY (idClient) REFERENCES clients(idClient)
 );
