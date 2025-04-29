@@ -11,7 +11,7 @@ CREATE TABLE clients (
     dateInscription DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE categorie (
+CREATE TABLE categorieClient (
     idCategorie INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(255)
 )
@@ -23,7 +23,7 @@ CREATE TABLE produits (
     idCategorie INT, 
     prix DECIMAL(10,2),
     quantiteStock INT
-    FOREIGN KEY (idCategorie) REFERENCES categorie(idCategorie)
+    FOREIGN KEY (idCategorie) REFERENCES categorieClient(idCategorie)
 );
 
 -- 3. Table des commandes
