@@ -1,6 +1,7 @@
 <?php
     session_start();
     include('../inc/fonctions.php');
+    include('../inc/fonctionCommande.php');
     $page = "accueil";
     if(isset($_GET['page'])){
         $page = $_GET['page'];
@@ -46,7 +47,7 @@
                 <li class="dropdown">
                     <button class="dropbtn">Commande</button>
                     <div class="dropdown-content">
-                        <a href="CRM-page.php?page=ajout-commande">Ajouter Commande</a>
+                        <a href="CRM-page.php?page=crm/ajout-commande">Ajouter Commande</a>
                         <?php if($isItFinance) { ?>
                             <a href="CRM-page.php?page=valider-prevision">Valider les previsions</a>
                         <?php } ?>
