@@ -53,7 +53,6 @@
                     <th>Classe</th>
                     <th>Produit</th>
                     <th>Quantité vendue</th>
-                    <th>Chiffre d\'affaire</th>
                   </tr></thead>';
             echo '<tbody>';
             
@@ -64,7 +63,6 @@
                 echo '<td>' . $row['classe'] . '</td>';
                 echo '<td>' . $row['produit'] . '</td>';
                 echo '<td>' . $row['quantite_vendue'] . '</td>';
-                echo '<td>' . number_format($row['chiffre_affaire'], 2, ',', ' ') . '</td>';
                 echo '</tr>';
             }
             

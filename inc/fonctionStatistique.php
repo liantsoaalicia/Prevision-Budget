@@ -24,4 +24,12 @@
         return $stats;
     }
 
+    // Clients par mois
+
+
+    // % tsara %ratsy entre 2 dates
+    function getStatistique3($date1, $date2) {
+        
+    }
+
 ?>
