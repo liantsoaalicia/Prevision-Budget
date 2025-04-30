@@ -148,6 +148,14 @@
         } return false;
     }
 
+    function verifyIfMarketing($sessionId) {
+        $departement = getDepartementById($sessionId);
+        $nom = $departement['nom'];
+        if($nom == 'Departement Marketing') {
+            return true;
+        } return false;
+    }
+
     // ceux qui ont ete valide 
     function getPrevisionDepartement($idDepartement) {
         $con = dbConnect();

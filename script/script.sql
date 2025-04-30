@@ -100,13 +100,14 @@ CREATE TABLE ligneCommandes (
 -- 6. Table des actions CRM (actions spécifiques réalisées)
 CREATE TABLE actionsCrm (
     idAction INT AUTO_INCREMENT PRIMARY KEY,
-    idClient INT,
+    idDepartement INT,
     typeAction VARCHAR(100),            -- Exemple : Email, Appel, Enquete, Promotion
     etapeAction VARCHAR(50),            -- Avant, Pendant, Apres
     dateAction DATETIME,
-    couts FLOAT,
+    coutsPrevision FLOAT,
+    coutsRealisation FLOAT,
     validationFinance Boolean,
-    FOREIGN KEY (idClient) REFERENCES clients(idClient)
+    FOREIGN KEY (idDepartement) REFERENCES departement(idDepartement)
 );
 
 CREATE TABLE reactionActionCrm (

@@ -62,6 +62,12 @@
                     </div>
                 </li>
                 <li class="dropdown">
+                    <button class="dropbtn">ActionsCRM</button>
+                    <div class="dropdown-content">
+                        <a href="CRM-page.php?page=crm/ajout-action-crm">Ajouter action</a>
+                    </div>
+                </li>
+                <li class="dropdown">
                     <form action="traitement-deconnection.php">
                         <button class="dropbtn" type="submit">Deconnexion</button>
                     </form>
