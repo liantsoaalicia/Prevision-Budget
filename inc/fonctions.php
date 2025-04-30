@@ -247,7 +247,7 @@
         $con = dbConnect();
     
         // Étape 1 : récupérer dateAction, coutsPrevision et typeAction
-        $stmt = $con->prepare("SELECT dateAction, coutsPrevision, typeAction FROM actionsCrm WHERE idAction = :idAction");
+        $stmt = $con->prepare("SELECT dateAction, coutsPrevision, coutsRealisation typeAction FROM actionsCrm WHERE idAction = :idAction");
         $stmt->execute([':idAction' => $idAction]);
         $action = $stmt->fetch(PDO::FETCH_ASSOC);
     
@@ -255,6 +255,7 @@
     
         $dateAction = $action['dateAction'];
         $coutsPrevision = $action['coutsPrevision'];
+        $coutsRealisation = $action['coutsRealisation'];
         $typeAction = $action['typeAction'];
     
         // Étape 2 : trouver la période correspondant à la dateAction
@@ -285,12 +286,13 @@
     
         // Étape 5 : insérer dans la table prevision
         $stmt = $con->prepare("INSERT INTO prevision (idDepartement, idPeriode, idCategorie, prevision, realisation, valide)
-                               VALUES (:idDepartement, :idPeriode, :idCategorie, :prevision, 0, 0)");
+                               VALUES (:idDepartement, :idPeriode, :idCategorie, :prevision, :realisation, 1)");
         return $stmt->execute([
             ':idDepartement' => $idDepartement,
             ':idPeriode' => $idPeriode,
             ':idCategorie' => $idCategorie,
-            ':prevision' => $coutsPrevision
+            ':prevision' => $coutsPrevision,
+            ':realisation'=> $coutsRealisation
         ]);
     }
     
