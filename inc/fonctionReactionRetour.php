@@ -97,5 +97,37 @@ function getRetoursClients($annee) {
 
     return $resultats;  
 }
+
+function getProduitsVendusParMois($annee) {
+    $con = dbConnect();
+
+    $query = "
+        SELECT MONTH(c.dateCommande) AS mois, SUM(l.quantite) AS total
+        FROM commandes c
+        JOIN ligneCommandes l ON c.idCommande = l.idCommande
+        WHERE YEAR(c.dateCommande) = :annee
+        GROUP BY mois
+        ORDER BY mois
+    ";
+
+    $stmt = $con->prepare($query);
+    $stmt->bindParam(':annee', $annee, PDO::PARAM_INT);
+    $stmt->execute();
+    $resultats = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Initialiser tous les mois à 0
+    $mois = [
+        'Janvier' => 0, 'Février' => 0, 'Mars' => 0, 'Avril' => 0,
+        'Mai' => 0, 'Juin' => 0, 'Juillet' => 0, 'Août' => 0,
+        'Septembre' => 0, 'Octobre' => 0, 'Novembre' => 0, 'Décembre' => 0
+    ];
+
+    foreach ($resultats as $row) {
+        $nomMois = date('F', mktime(0, 0, 0, $row['mois'], 10));
+        $mois[ucfirst(strtolower($nomMois))] = (int)$row['total'];
+    }
+
+    return $mois;
+}
 ?>
 ?>

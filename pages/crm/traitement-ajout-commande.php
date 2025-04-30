@@ -1,16 +1,16 @@
 <?php
   include("../../inc/connection.php");
 
-function ajoutCommandeAvecLignes($idClient, $lignesCommande, $montantTotal, $statut = 'EnAttente') {
+function ajoutCommandeAvecLignes($idClient, $lignesCommande, $montantTotal, $statut = 'EnAttente', $dateCommande=null) {
     $con = dbConnect();
 
     try {
         $con->beginTransaction();
 
         // Insérer la commande
-        $queryCommande = "INSERT INTO commandes (idClient, montantTotal, statut) VALUES (?, ?, ?)";
+        $queryCommande = "INSERT INTO commandes (idClient, dateCommande, montantTotal, statut) VALUES (?, ?, ?, ?)";
         $stmtCommande = $con->prepare($queryCommande);
-        $stmtCommande->execute([$idClient, $montantTotal, $statut]);
+        $stmtCommande->execute([$idClient, $dateCommande, $montantTotal, $statut]);
 
         $idCommande = $con->lastInsertId();
 
@@ -41,6 +41,7 @@ $idClient = $_POST['idClient'];
 $produits = $_POST['produits'];
 $quantites = $_POST['quantites'];
 $statut = $_POST['statut'] ?? 'EnAttente';
+$dateCommande = $_POST['dateCommande'];
 
 if (!isset($idClient) || empty($produits) || empty($quantites)) {
     header("Location: ../CRM-page.php?page=crm/ajout-commande&erreur=Données manquantes");
@@ -71,7 +72,7 @@ foreach ($produits as $index => $idProduit) {
 }
 
 // Appeler la fonction d'insertion
-$success = ajoutCommandeAvecLignes($idClient, $lignesCommande, $montantTotal, $statut);
+$success = ajoutCommandeAvecLignes($idClient, $lignesCommande, $montantTotal, $statut, $dateCommande);
 
 if ($success) {
     header("Location: ../CRM-page.php?page=crm/ajout-commande&success=Commande ajoutée avec succès");

@@ -39,6 +39,11 @@ $produits = getAllProduits();
         <button type="button" onclick="ajouterLigneProduit()">Ajouter un produit</button>
 
         <div>
+            <label for="dateCommande">Date de la commande :</label>
+            <input type="date" id="dateCommande" name="dateCommande" required>
+        </div>
+
+        <div>
             <label for="statut">Statut :</label>
             <select name="statut" id="statut" required>
                 <option value="EnAttente">En Attente</option>
