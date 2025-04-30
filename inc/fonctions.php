@@ -240,4 +240,74 @@
         return $categories;
     }
 
+    function validerAction($idAction) {
+        session_start();
+        $idDepartement = $_SESSION['id'];
+    
+        $con = dbConnect();
+    
+        // Étape 1 : récupérer dateAction, coutsPrevision et typeAction
+        $stmt = $con->prepare("SELECT dateAction, coutsPrevision, typeAction FROM actionsCrm WHERE idAction = :idAction");
+        $stmt->execute([':idAction' => $idAction]);
+        $action = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if (!$action) return false;
+    
+        $dateAction = $action['dateAction'];
+        $coutsPrevision = $action['coutsPrevision'];
+        $typeAction = $action['typeAction'];
+    
+        // Étape 2 : trouver la période correspondant à la dateAction
+        $stmt = $con->prepare("SELECT idPeriode FROM periode WHERE :dateAction BETWEEN dateDebut AND dateFin");
+        $stmt->execute([':dateAction' => $dateAction]);
+        $periode = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if (!$periode) return false;
+    
+        $idPeriode = $periode['idPeriode'];
+    
+        // Étape 3 : mettre à jour validationFinance à true
+        $stmt = $con->prepare("UPDATE actionsCrm SET validationFinance = true WHERE idAction = :idAction");
+        $stmt->execute([':idAction' => $idAction]);
+    
+        // Étape 4 : chercher ou créer la catégorie correspondante
+        $stmt = $con->prepare("SELECT idCategorie FROM categorie WHERE categorie = 'Depense' AND types = 'ActionCRM' AND nature = :nature");
+        $stmt->execute([':nature' => $typeAction]);
+        $categorie = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if (!$categorie) {
+            $stmt = $con->prepare("INSERT INTO categorie (categorie, types, nature) VALUES ('Depense', 'ActionCRM', :nature)");
+            $stmt->execute([':nature' => $typeAction]);
+            $idCategorie = $con->lastInsertId();
+        } else {
+            $idCategorie = $categorie['idCategorie'];
+        }
+    
+        // Étape 5 : insérer dans la table prevision
+        $stmt = $con->prepare("INSERT INTO prevision (idDepartement, idPeriode, idCategorie, prevision, realisation, valide)
+                               VALUES (:idDepartement, :idPeriode, :idCategorie, :prevision, 0, 0)");
+        return $stmt->execute([
+            ':idDepartement' => $idDepartement,
+            ':idPeriode' => $idPeriode,
+            ':idCategorie' => $idCategorie,
+            ':prevision' => $coutsPrevision
+        ]);
+    }
+    
+    function getAllInvalidActionsCrm() {
+        $con = dbConnect();
+        $stmt = $con->query("
+            SELECT 
+                ac.idAction,
+                d.nom AS nom_departement,
+                ac.typeAction,
+                ac.dateAction,
+                ac.coutsPrevision
+            FROM actionsCrm ac
+            JOIN departement d ON ac.idDepartement = d.idDepartement
+            WHERE ac.validationFinance = 0
+        ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
 ?>
