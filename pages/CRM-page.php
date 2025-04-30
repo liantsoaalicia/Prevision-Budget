@@ -71,6 +71,11 @@
                     </div>
                 </li>
                 <li class="dropdown">
+                    <form action="template.php">
+                        <button class="dropbtn" type="submit">Budget</button>
+                    </form>
+                </li>
+                <li class="dropdown">
                     <form action="traitement-deconnection.php">
                         <button class="dropbtn" type="submit">Deconnexion</button>
                     </form>
