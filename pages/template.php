@@ -48,7 +48,7 @@
                     <div class="dropdown-content">
                         <a href="template.php?page=ajout-prevision">Ajouter prévision</a>
                         <a href="template.php?page=soldes">Voir soldes</a>
-                        <a href="#budget-total">Voir budget total</a>
+                        <a href="#budget-total">Voir budget global</a>
                         <?php if($isItFinance) { ?>
                             <a href="template.php?page=valider-prevision">Valider les previsions</a>
                         <?php } ?>

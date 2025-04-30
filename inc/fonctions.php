@@ -247,7 +247,7 @@
         $con = dbConnect();
     
         // Étape 1 : récupérer dateAction, coutsPrevision et typeAction
-        $stmt = $con->prepare("SELECT dateAction, coutsPrevision, coutsRealisation typeAction FROM actionsCrm WHERE idAction = :idAction");
+        $stmt = $con->prepare("SELECT dateAction, coutsPrevision, coutsRealisation, typeAction FROM actionsCrm WHERE idAction = :idAction");
         $stmt->execute([':idAction' => $idAction]);
         $action = $stmt->fetch(PDO::FETCH_ASSOC);
     

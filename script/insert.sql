@@ -27,7 +27,8 @@ INSERT INTO categorieProduit (nom) VALUES
 ('Pâtisseries');
 
 INSERT INTO produits (nom, description, idCategorie, prix, quantiteStock) VALUES 
-('Tablette de chocolat noir', 'Chocolat noir pur à 70%', 1, 4.50, 100),
+('Tablette de chocolat noir', 'Chocolat noir pur à 70%', 1, 4.50, 100);
+INSERT INTO produits (nom, description, idCategorie, prix, quantiteStock) VALUES 
 ('Savon au beurre de cacao', 'Savon naturel hydratant pour la peau', 2, 3.90, 50),
 ('Boisson cacao glacée', 'Boisson rafraîchissante au cacao', 3, 2.00, 200),
 ('Crème visage cacao', 'Crème nourrissante pour le visage', 2, 7.50, 30),
