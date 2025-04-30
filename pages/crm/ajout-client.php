@@ -32,6 +32,10 @@
                 <option value="bas">Bas</option>
             </select>
         </div>
+        <div>
+            <label for="dateInscription">Date d'inscription :</label>
+            <input type="date" name="dateInscription" id="dateInscription" required>
+        </div>
         <button type="submit">Ajouter</button>
     </form>
 </section>

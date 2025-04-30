@@ -57,7 +57,7 @@
                     <button class="dropbtn">Statistiques</button>
                     <div class="dropdown-content">
                         <a href="CRM-page.php?page=crm/statistiques/produits-vendus">Produits vendus</a>
-                        <a href="CRM-page.php?page=crm/statistiques/clients-par-mois">La liste des clients par mois</a>
+                        <a href="CRM-page.php?page=crm/statistiques/statistique-nouveaux-clients">La liste des clients par mois</a>
                         <a href="CRM-page.php?page=crm/statistiques/pourcentage">Pourcentage tsara/ratsy entre 2 dates</a>
                     </div>
                 </li>
