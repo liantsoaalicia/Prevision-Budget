@@ -71,5 +71,31 @@ function deleteRetourClient($idRetour) {
     return $stmt->execute();
 }
 
+function getRetoursClients($annee) {
+    $con = dbConnect(); 
 
+    $sql = "SELECT avis, COUNT(*) AS total
+            FROM retoursClients
+            WHERE YEAR(dateRetour) = ?
+            GROUP BY avis";
+    
+    $stmt = $con->prepare($sql);
+    $stmt->execute([$annee]);
+
+    $resultats = [
+        'tsara' => 0,  
+        'ratsy' => 0   
+    ];
+
+    foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
+        if ($row['avis'] === 'tsara') {
+            $resultats['tsara'] = (int)$row['total'];  
+        } elseif ($row['avis'] === 'ratsy') {
+            $resultats['ratsy'] = (int)$row['total'];  
+        }
+    }
+
+    return $resultats;  
+}
+?>
 ?>
