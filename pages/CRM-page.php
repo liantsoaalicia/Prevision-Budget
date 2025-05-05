@@ -62,6 +62,7 @@
                     <button class="dropbtn">ActionsCRM</button>
                     <div class="dropdown-content">
                         <a href="CRM-page.php?page=crm/ajout-action-crm">Ajouter action</a>
+                        <a href="CRM-page.php?page=crm/ajout-evenement">Ajouter événement</a>
                         <?php if($isItFinance){ ?>
                             <a href="CRM-page.php?page=crm/valider-action-crm">Valider des actions</a>
                         <?php } ?>
