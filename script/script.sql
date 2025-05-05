@@ -97,17 +97,25 @@ CREATE TABLE ligneCommandes (
     FOREIGN KEY (idProduit) REFERENCES produits(idProduit)
 );
 
+CREATE TABLE evenement (
+    idEvenement INT AUTO_INCREMENT PRIMARY KEY,
+    nomEvenement VARCHAR(255),
+    dateDebut DATE,
+    dateFin DATE
+);
 -- 6. Table des actions CRM (actions spécifiques réalisées)
 CREATE TABLE actionsCrm (
     idAction INT AUTO_INCREMENT PRIMARY KEY,
     idDepartement INT,
     typeAction VARCHAR(100),            -- Exemple : Email, Appel, Enquete, Promotion
     etapeAction VARCHAR(50),            -- Avant, Pendant, Apres
+    idEvenement INT,
     dateAction DATETIME,
     coutsPrevision FLOAT,
     coutsRealisation FLOAT,
     validationFinance Boolean,
-    FOREIGN KEY (idDepartement) REFERENCES departement(idDepartement)
+    FOREIGN KEY (idDepartement) REFERENCES departement(idDepartement),
+    FOREIGN KEY (idEvenement) REFERENCES evenement(idEvenement)
 );
 
 CREATE TABLE reactionActionCrm (
