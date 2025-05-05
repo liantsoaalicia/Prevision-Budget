@@ -1,7 +1,7 @@
 INSERT INTO departement(nom, mdp) VALUES 
 ('Departement Administration', 'admin'),
 ('Departement Maintenance', 'maintenance'),
-('Departement Finance', 'finance');
+('Departement Finance', 'finance'),
 ('Departement Marketing', 'marketing');
 
 INSERT INTO periode(nom, dateDebut, dateFin) VALUES

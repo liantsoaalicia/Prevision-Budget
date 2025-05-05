@@ -57,6 +57,8 @@
                         <a href="CRM-page.php?page=crm/statistiques/statistique-produits-vendus">Produits vendus</a>
                         <a href="CRM-page.php?page=crm/statistiques/statistique-nouveaux-clients">La liste des clients par mois</a>
                         <a href="CRM-page.php?page=crm/statistiques/statistique-retours-clients">Retours client</a>
+                        <a href="CRM-page.php?page=crm/statistiques/statistique-total-clients">Nombre total de clients par segment</a>
+                        <a href="CRM-page.php?page=crm/statistiques/statistique-cout-crm">Cout total des actions CRM</a>
                     </div>
                 </li>
                 <li class="dropdown">
