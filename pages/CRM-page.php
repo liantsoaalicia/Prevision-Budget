@@ -48,9 +48,6 @@
                     <button class="dropbtn">Commande</button>
                     <div class="dropdown-content">
                         <a href="CRM-page.php?page=crm/ajout-commande">Ajouter Commande</a>
-                        <?php if($isItFinance) { ?>
-                            <a href="CRM-page.php?page=valider-prevision">Valider les previsions</a>
-                        <?php } ?>
                     </div>
                 </li>
                 <li class="dropdown">
