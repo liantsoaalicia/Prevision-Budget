@@ -40,3 +40,7 @@ INSERT INTO clients (prenom, nom, email, age, sexe, classe) VALUES
 ('Tiana', 'Andria', 'tiana.andria@example.com', 22, 'Femme', 'eleve'),
 ('Hery', 'Ranaivo', 'hery.ranaivo@example.com', 41, 'Homme', 'moyen'),
 ('Soa', 'Ravelo', 'soa.ravelo@example.com', 30, 'Femme', 'bas');
+
+-- Pour mettre la commande dans le budget
+INSERT INTO categorie(categorie, types, nature) VALUES
+('Recette', 'Vente', 'Vente des produits a base de cacao');
