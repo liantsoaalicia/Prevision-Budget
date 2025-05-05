@@ -13,8 +13,9 @@ if (
     $dateAction = $_POST['dateAction'];
     $coutsPrevision = $_POST['coutsPrevision'];
     $coutsRealisation = $_POST['coutsRealisation'];
+    $idEvenement = $_POST['idEvenement'];
 
-    $res = insertActionCrm($typeAction, $etapeAction, $dateAction, $coutsPrevision, $coutsRealisation);
+    $res = insertActionCrm($typeAction, $etapeAction, $dateAction, $coutsPrevision, $coutsRealisation, $idEvenement);
 
     if ($res) {
         header("Location: ../CRM-page.php?page=crm/ajout-action-crm&success=Action CRM ajoutée avec succès");

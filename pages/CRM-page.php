@@ -2,6 +2,7 @@
     session_start();
     include('../inc/fonctions.php');
     include('../inc/fonctionCommande.php');
+    include('../inc/fonctionEvenement.php');
     $page = "accueil";
     if(isset($_GET['page'])){
         $page = $_GET['page'];

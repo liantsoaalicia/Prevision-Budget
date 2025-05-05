@@ -1,3 +1,6 @@
+<?php
+    $events = getAllEvenement();
+?>
 <section id="ajout-action-crm">
     <h1 class="main-title">Ajout d'une action CRM</h1>
     <form action="crm/traitement-ajout-action-crm.php" method="post">
@@ -13,6 +16,19 @@
                 <option value="Apres">Apres</option>
             </select>
         </div>
+
+        <div>
+            <label for="idEvenement">Evenement :</label>
+            <select id="idEvenement" name="idEvenement" required>
+                <option value="">-- Sélectionnez un evenement --</option>
+                <?php foreach ($events as $event): ?>
+                    <option value="<?= $event['idEvenement'] ?>">
+                        <?= $event['nomEvenement'] ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
         <div>
             <label for="dateAction">Date de l'action :</label>
             <input type="date" name="dateAction" id="dateAction" required>

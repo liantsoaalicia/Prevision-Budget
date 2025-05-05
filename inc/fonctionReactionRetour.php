@@ -131,12 +131,13 @@ function getProduitsVendusParMois($annee) {
     return $mois;
 }
 
-function insertActionCrm($typeAction, $etapeAction, $dateAction, $coutsPrevision, $coutsRealisation) {
+function insertActionCrm($typeAction, $etapeAction, $dateAction, $coutsPrevision, $coutsRealisation, $idEvenement) {
     $con = dbConnect();
-    $query = "INSERT INTO actionsCrm (idDepartement, typeAction, etapeAction, dateAction, coutsPrevision, coutsRealisation, validationFinance)
-              VALUES (:idDpt, :typeAction, :etapeAction, :dateAction, :coutsPrevision, :coutsRealisation, false)";
+    $query = "INSERT INTO actionsCrm (idDepartement, idEvenement, typeAction, etapeAction, dateAction, coutsPrevision, coutsRealisation, validationFinance)
+              VALUES (:idDpt, :idEvenement, :typeAction, :etapeAction, :dateAction, :coutsPrevision, :coutsRealisation, false)";
     $stmt = $con->prepare($query);
     $stmt->bindParam(':idDpt', $_SESSION['id'], PDO::PARAM_INT);
+    $stmt->bindParam(':idEvenement', $idEvenement, PDO::PARAM_INT);
     $stmt->bindParam(':typeAction', $typeAction, PDO::PARAM_STR);
     $stmt->bindParam(':etapeAction', $etapeAction, PDO::PARAM_STR);
     $stmt->bindParam(':dateAction', $dateAction, PDO::PARAM_STR);
