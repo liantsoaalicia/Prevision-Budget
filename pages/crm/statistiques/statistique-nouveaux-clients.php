@@ -3,7 +3,6 @@ require("../inc/fonctionClient.php");
 
 $annee = isset($_GET['annee']) ? $_GET['annee'] : date("Y");
 
-// Nouvelle fonction pour récupérer les nouveaux clients par sexe et par mois
 function getNouveauxClientsParSexeEtMois($annee) {
     $con = dbConnect();
 
@@ -26,11 +25,9 @@ function getNouveauxClientsParSexeEtMois($annee) {
 
 $data = getNouveauxClientsParSexeEtMois($annee);
 
-// Préparer les données pour le graphique
 $moisNoms = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 
              'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
 
-// Initialiser les données pour chaque sexe
 $hommes = array_fill(0, 12, 0);
 $femmes = array_fill(0, 12, 0);
 
@@ -105,13 +102,11 @@ $totalClients = array_sum($hommes) + array_sum($femmes);
                         text: 'Nombre de nouveaux clients'
                     },
                     ticks: {
-                        // Force les valeurs entières sans décimales
                         callback: function(value) {
                             if (value % 1 === 0) {
                                 return value;
                             }
                         },
-                        // Ajuste automatiquement le pas de graduation
                         stepSize: 1
                     }
                 },

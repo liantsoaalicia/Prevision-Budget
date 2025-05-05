@@ -4,7 +4,6 @@ require("../inc/fonctionReactionRetour.php");
 
 $annee = isset($_GET['annee']) ? $_GET['annee'] : date("Y");
 
-// Fonction pour obtenir les retours clients avec plus de détails
 function getStatistiquesRetoursClients($annee) {
     $con = dbConnect();
 
@@ -52,9 +51,8 @@ function getStatistiquesRetoursClients($annee) {
 
 $stats = getStatistiquesRetoursClients($annee);
 
-// Préparer les données pour le graphique global
 $labelsGlobal = ['Tsara', 'Ratsy'];
-$dataGlobal = [0, 0]; // Initialiser à 0
+$dataGlobal = [0, 0]; 
 
 foreach ($stats['global'] as $retour) {
     if ($retour['avis'] === 'tsara') {
@@ -81,7 +79,6 @@ $totalRetours = array_sum($dataGlobal);
         <p style="color: red; font-weight: bold;">Aucun retour client enregistré en <?= htmlspecialchars($annee) ?>.</p>
     <?php } else { ?>
         <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-            <!-- Graphique global -->
             <div style="width: 400px; height: 400px;">
                 <h3>Répartition globale des retours</h3>
                 <canvas id="graphiqueRetoursGlobaux"></canvas>
@@ -92,7 +89,6 @@ $totalRetours = array_sum($dataGlobal);
                 <?php } ?>
             </div>
 
-            <!-- Graphique par produit -->
             <div style="width: 400px; height: 400px;">
                 <h3>Top 5 produits avec retours</h3>
                 <canvas id="graphiqueRetoursProduits"></canvas>
@@ -101,7 +97,6 @@ $totalRetours = array_sum($dataGlobal);
 
         <script src="../assets/js/chart.umd.js"></script>
         <script>
-            // Graphique global
             const ctxGlobal = document.getElementById('graphiqueRetoursGlobaux').getContext('2d');
             new Chart(ctxGlobal, {
                 type: 'pie',
@@ -141,7 +136,6 @@ $totalRetours = array_sum($dataGlobal);
                 }
             });
 
-            // Préparation des données pour le graphique par produit
             const produits = <?= json_encode(array_unique(array_column($stats['par_produit'], 'produit'))) ?>;
             const dataProduits = {
                 labels: produits,
@@ -167,7 +161,6 @@ $totalRetours = array_sum($dataGlobal);
                 ]
             };
 
-            // Graphique par produit (stacked bar chart)
             const ctxProduits = document.getElementById('graphiqueRetoursProduits').getContext('2d');
             new Chart(ctxProduits, {
                 type: 'bar',

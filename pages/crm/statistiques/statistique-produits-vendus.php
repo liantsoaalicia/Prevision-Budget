@@ -29,31 +29,27 @@ function getDetailsProduitsVendusParMois($annee) {
 
 $detailsVentes = getDetailsProduitsVendusParMois($annee);
 
-// Noms des mois
 $moisNoms = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 
              'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
 
-// Récupérer les 5 produits les plus vendus sur l'année
 $topProduits = [];
 foreach ($detailsVentes as $vente) {
     if (!isset($topProduits[$vente['idProduit']])) {
         $topProduits[$vente['idProduit']] = [
             'nom' => $vente['produit'],
             'total' => 0,
-            'mois' => array_fill(0, 12, 0) // Initialiser tous les mois à 0
+            'mois' => array_fill(0, 12, 0) 
         ];
     }
     $topProduits[$vente['idProduit']]['total'] += $vente['quantite'];
     $topProduits[$vente['idProduit']]['mois'][$vente['mois'] - 1] = (int)$vente['quantite'];
 }
 
-// Trier et garder les 5 premiers
 usort($topProduits, function($a, $b) {
     return $b['total'] - $a['total'];
 });
 $topProduits = array_slice($topProduits, 0, 5);
 
-// Préparer les données pour Chart.js
 $datasets = [];
 $colors = [
     'rgba(255, 99, 132, 0.7)',

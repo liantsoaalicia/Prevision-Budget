@@ -3,7 +3,6 @@ require("../inc/fonctionClient.php");
 
 $annee = isset($_GET['annee']) ? $_GET['annee'] : date("Y");
 
-// Fonction pour obtenir les statistiques des coûts CRM
 function getStatistiquesCoutsCRM($annee) {
     $con = dbConnect();
 
@@ -59,7 +58,6 @@ function getStatistiquesCoutsCRM($annee) {
     $stmtType->execute();
     $statsType = $stmtType->fetchAll(PDO::FETCH_ASSOC);
 
-    // Calcul des totaux
     $totalPrevision = 0;
     $totalRealisation = 0;
 
@@ -79,11 +77,9 @@ function getStatistiquesCoutsCRM($annee) {
 
 $stats = getStatistiquesCoutsCRM($annee);
 
-// Noms des mois
 $moisNoms = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 
              'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
 
-// Préparation des données pour le graphique par mois
 $dataPrevisionMois = array_fill(0, 12, 0);
 $dataRealisationMois = array_fill(0, 12, 0);
 
@@ -93,13 +89,11 @@ foreach ($stats['par_mois'] as $stat) {
     $dataRealisationMois[$moisIndex] = (float)$stat['total_realisation'];
 }
 
-// Calculer l'écart en pourcentage
 $ecartPourcentage = 0;
 if ($stats['total_prevision'] > 0) {
     $ecartPourcentage = round((($stats['total_realisation'] - $stats['total_prevision']) / $stats['total_prevision']) * 100, 2);
 }
 
-// Préparation des données pour le graphique par département
 $departements = [];
 $dataPrevisionDept = [];
 $dataRealisationDept = [];
@@ -110,7 +104,6 @@ foreach ($stats['par_departement'] as $stat) {
     $dataRealisationDept[] = (float)$stat['total_realisation'];
 }
 
-// Préparation des données pour le graphique par type d'action
 $typesAction = [];
 $dataPrevisionType = [];
 $dataRealisationType = [];
@@ -135,7 +128,6 @@ foreach ($stats['par_type'] as $stat) {
     <?php if ($stats['total_prevision'] == 0 && $stats['total_realisation'] == 0) { ?>
         <p style="color: red; font-weight: bold;">Aucune action CRM enregistrée en <?= htmlspecialchars($annee) ?>.</p>
     <?php } else { ?>
-        <!-- Résumé des coûts totaux -->
         <div style="margin: 20px 0; padding: 20px; background-color: #f9f9f9; border-radius: 8px; text-align: center;">
             <h2>Résumé des coûts pour l'année <?= htmlspecialchars($annee) ?></h2>
             <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
@@ -157,7 +149,6 @@ foreach ($stats['par_type'] as $stat) {
             </div>
         </div>
 
-        <!-- Graphique par mois -->
         <div style="margin-top: 40px;">
             <h3>Évolution mensuelle des coûts</h3>
             <div style="height: 400px;">
@@ -165,7 +156,6 @@ foreach ($stats['par_type'] as $stat) {
             </div>
         </div>
 
-        <!-- Graphique par département -->
         <div style="margin-top: 40px;">
             <h3>Coûts par département</h3>
             <div style="height: 400px;">
@@ -173,7 +163,6 @@ foreach ($stats['par_type'] as $stat) {
             </div>
         </div>
 
-        <!-- Graphique par type d'action -->
         <div style="margin-top: 40px;">
             <h3>Coûts par type d'action</h3>
             <div style="height: 400px;">
@@ -183,7 +172,6 @@ foreach ($stats['par_type'] as $stat) {
 
         <script src="../assets/js/chart.umd.js"></script>
         <script>
-            // Graphique par mois
             const ctxMois = document.getElementById('graphiqueCoutsMensuels').getContext('2d');
             new Chart(ctxMois, {
                 type: 'line',
@@ -240,7 +228,6 @@ foreach ($stats['par_type'] as $stat) {
                 }
             });
 
-            // Graphique par département
             const ctxDepartement = document.getElementById('graphiqueCoutsDepartements').getContext('2d');
             new Chart(ctxDepartement, {
                 type: 'bar',
@@ -294,7 +281,6 @@ foreach ($stats['par_type'] as $stat) {
                 }
             });
 
-            // Graphique par type d'action
             const ctxType = document.getElementById('graphiqueTypesAction').getContext('2d');
             new Chart(ctxType, {
                 type: 'bar',

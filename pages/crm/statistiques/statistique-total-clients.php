@@ -3,7 +3,6 @@ require("../inc/fonctionClient.php");
 
 $annee = isset($_GET['annee']) ? $_GET['annee'] : date("Y");
 
-// Fonction pour obtenir les statistiques des clients par segment
 function getStatistiquesClientsParSegment($annee) {
     $con = dbConnect();
 
@@ -62,7 +61,6 @@ function getStatistiquesClientsParSegment($annee) {
 
 $stats = getStatistiquesClientsParSegment($annee);
 
-// Préparation des données pour les graphiques
 $labelsSexe = [];
 $dataSexe = [];
 foreach ($stats['par_sexe'] as $item) {
@@ -77,7 +75,6 @@ foreach ($stats['par_classe'] as $item) {
     $dataClasse[] = (int)$item['nombre_clients'];
 }
 
-// Préparer les données pour le graphique croisé
 $classes = ['eleve', 'moyen', 'bas'];
 $sexes = ['Homme', 'Femme'];
 
