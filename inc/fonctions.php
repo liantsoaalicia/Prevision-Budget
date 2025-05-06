@@ -240,6 +240,15 @@
         return $categories;
     }
 
+    function getNomEvenement($idEvenement){
+        $con = dbConnect();
+        $query = "SELECT nomEvenement FROM evenement where idEvenement=?";
+        $stmt = $con->prepare($query);
+        $stmt->execute([$idEvenement]);
+        $result = $stmt->fetchColumn();
+        return $result;
+    }
+
     function validerAction($idAction) {
         session_start();
         $idDepartement = $_SESSION['id'];
@@ -247,7 +256,7 @@
         $con = dbConnect();
     
         // Étape 1 : récupérer dateAction, coutsPrevision et typeAction
-        $stmt = $con->prepare("SELECT dateAction, coutsPrevision, coutsRealisation, typeAction FROM actionsCrm WHERE idAction = :idAction");
+        $stmt = $con->prepare("SELECT idEvenement, dateAction, coutsPrevision, coutsRealisation, typeAction FROM actionsCrm WHERE idAction = :idAction");
         $stmt->execute([':idAction' => $idAction]);
         $action = $stmt->fetch(PDO::FETCH_ASSOC);
     
@@ -257,7 +266,9 @@
         $coutsPrevision = $action['coutsPrevision'];
         $coutsRealisation = $action['coutsRealisation'];
         $typeAction = $action['typeAction'];
-    
+        $nomEvent = getNomEvenement($action['idEvenement']);
+        $nom = $typeAction . " - " . $nomEvent;
+
         // Étape 2 : trouver la période correspondant à la dateAction
         $stmt = $con->prepare("SELECT idPeriode FROM periode WHERE :dateAction BETWEEN dateDebut AND dateFin");
         $stmt->execute([':dateAction' => $dateAction]);
@@ -278,7 +289,7 @@
     
         if (!$categorie) {
             $stmt = $con->prepare("INSERT INTO categorie (categorie, types, nature) VALUES ('Depense', 'ActionCRM', :nature)");
-            $stmt->execute([':nature' => $typeAction]);
+            $stmt->execute([':nature' => $nom]);
             $idCategorie = $con->lastInsertId();
         } else {
             $idCategorie = $categorie['idCategorie'];

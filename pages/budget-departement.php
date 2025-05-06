@@ -64,25 +64,44 @@
                 <?php endforeach; ?>
             </tr>
             
-            <?php foreach ($categories['depenses'] as $cat): ?>
-                <tr class="depense">
-                    <td><?= htmlspecialchars($cat['types'] . ' - ' . $cat['nature']) ?></td>
-                    <?php foreach ($periodes as $periode): ?>
-                        <?php
-                            $prev = array_filter($previsions, function($p) use ($cat, $periode) {
-                                return $p['idCategorie'] == $cat['idCategorie'] && $p['idPeriode'] == $periode['idPeriode'];
-                            });
-                            $prev = reset($prev);
-                            $prevision = $prev['prevision'] ?? 0;
-                            $realisation = $prev['realisation'] ?? 0;
-                            $ecart = $prevision - $realisation;
-                        ?>
-                        <td><?= number_format($prevision, 2) ?></td>
-                        <td><?= number_format($realisation, 2) ?></td>
-                        <td><?= number_format($ecart, 2) ?></td>
+            <?php if (!empty($categories['depenses'])): ?>
+                <tr><td colspan="<?= 1 + count($periodes) * 3 ?>"><strong>Dépenses</strong></td></tr>
+                <?php
+                $types_depenses = [];
+                foreach ($categories['depenses'] as $cat) {
+                    $types_depenses[$cat['types']][$cat['nature']] = $cat['idCategorie'];
+                }
+
+                foreach ($types_depenses as $type => $natures) { ?>
+                    <tr class="type-depense">
+                        <td><strong><?= htmlspecialchars($type) ?></strong></td>
+                        <?php foreach ($periodes as $periode): ?>
+                            <td colspan="3"></td>
+                        <?php endforeach; ?>
+                    </tr>
+
+                    <?php foreach ($natures as $nature => $idCategorie): ?>
+                        <tr class="nature-depense">
+                            <td style="padding-left: 20px;"><?= htmlspecialchars($nature) ?></td>
+                            <?php foreach ($periodes as $periode): ?>
+                                <?php
+                                    $prev = array_filter($previsions, function($p) use ($idCategorie, $periode) {
+                                        return $p['idCategorie'] == $idCategorie && $p['idPeriode'] == $periode['idPeriode'];
+                                    });
+                                    $prev = reset($prev);
+                                    $prevision = $prev['prevision'] ?? 0;
+                                    $realisation = $prev['realisation'] ?? 0;
+                                    $ecart = $prevision - $realisation;
+                                ?>
+                                <td><?= number_format($prevision, 2) ?></td>
+                                <td><?= number_format($realisation, 2) ?></td>
+                                <td><?= number_format($ecart, 2) ?></td>
+                            <?php endforeach; ?>
+                        </tr>
                     <?php endforeach; ?>
-                </tr>
-            <?php endforeach; ?>
+                <?php } ?>
+            <?php endif; ?>
+
             
             <tr class="total-depense">
                 <td> Total D&eacute;pense : </td>
@@ -94,25 +113,43 @@
             </tr>
             
 
-            <?php foreach ($categories['recettes'] as $cat): ?>
-                <tr class="recette">
-                    <td><?= htmlspecialchars($cat['types'] . ' - ' . $cat['nature']) ?></td>
-                    <?php foreach ($periodes as $periode): ?>
-                        <?php
-                            $prev = array_filter($previsions, function($p) use ($cat, $periode) {
-                                return $p['idCategorie'] == $cat['idCategorie'] && $p['idPeriode'] == $periode['idPeriode'];
-                            });
-                            $prev = reset($prev);
-                            $prevision = $prev['prevision'] ?? 0;
-                            $realisation = $prev['realisation'] ?? 0;
-                            $ecart = $prevision - $realisation;
-                        ?>
-                        <td><?= number_format($prevision, 2) ?></td>
-                        <td><?= number_format($realisation, 2) ?></td>
-                        <td><?= number_format($ecart, 2) ?></td>
+            <?php if (!empty($categories['recettes'])): ?>
+                <tr><td colspan="<?= 1 + count($periodes) * 3 ?>"><strong>Recettes</strong></td></tr>
+                <?php
+                $types_recettes = [];
+                foreach ($categories['recettes'] as $cat) {
+                    $types_recettes[$cat['types']][$cat['nature']] = $cat['idCategorie'];
+                }
+
+                foreach ($types_recettes as $type => $natures) { ?>
+                    <tr class="type-recette">
+                        <td><strong><?= htmlspecialchars($type) ?></strong></td>
+                        <?php foreach ($periodes as $periode): ?>
+                            <td colspan="3"></td>
+                        <?php endforeach; ?>
+                    </tr>
+
+                    <?php foreach ($natures as $nature => $idCategorie): ?>
+                        <tr class="nature-recette">
+                            <td style="padding-left: 20px;"><?= htmlspecialchars($nature) ?></td>
+                            <?php foreach ($periodes as $periode): ?>
+                                <?php
+                                    $prev = array_filter($previsions, function($p) use ($idCategorie, $periode) {
+                                        return $p['idCategorie'] == $idCategorie && $p['idPeriode'] == $periode['idPeriode'];
+                                    });
+                                    $prev = reset($prev);
+                                    $prevision = $prev['prevision'] ?? 0;
+                                    $realisation = $prev['realisation'] ?? 0;
+                                    $ecart = $prevision - $realisation;
+                                ?>
+                                <td><?= number_format($prevision, 2) ?></td>
+                                <td><?= number_format($realisation, 2) ?></td>
+                                <td><?= number_format($ecart, 2) ?></td>
+                            <?php endforeach; ?>
+                        </tr>
                     <?php endforeach; ?>
-                </tr>
-            <?php endforeach; ?>
+                <?php } ?>
+            <?php endif; ?>
 
             <tr class="total-recette">
                 <td> Total Recette : </td>
