@@ -99,7 +99,7 @@ $totalClients = array_sum($dataSexe);
     <h1 class="main-title">Statistique : Analyse des clients par segment</h1>
 
     <form method="get" action="CRM-page.php">
-        <input type="hidden" name="page" value="crm/statistiques/statistique-clients-segments">
+        <input type="hidden" name="page" value="crm/statistiques/statistique-total-clients">
         <label for="annee">Année :</label>
         <input type="number" name="annee" id="annee" value="<?= htmlspecialchars($annee) ?>" min="2000" max="<?= date("Y") ?>">
         <button type="submit">Afficher</button>
