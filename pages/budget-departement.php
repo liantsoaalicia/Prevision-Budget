@@ -87,10 +87,10 @@
             <tr class="total-depense">
                 <td> Total D&eacute;pense : </td>
                 <?php foreach ($periodes as $periode): ?>
-                        <td><?= number_format(getTotalDepensePrevue($d['idDepartement'], $periode['idPeriode']),2); ?></td>
-                        <td><?= number_format(getTotalDepenseRealisee($d['idDepartement'], $periode['idPeriode']), 2); ?></td>
-                        <td> - </td>
-                    <?php endforeach; ?>
+                    <td><?= number_format(getTotalDepensePrevue($d['idDepartement'], $periode['idPeriode']),2); ?></td>
+                    <td><?= number_format(getTotalDepenseRealisee($d['idDepartement'], $periode['idPeriode']), 2); ?></td>
+                    <td> - </td>
+                <?php endforeach; ?>
             </tr>
             
 
@@ -120,7 +120,7 @@
                         <td><?= number_format(getTotalRecettePrevue($d['idDepartement'], $periode['idPeriode']), 2); ?></td>
                         <td><?= number_format(getTotalRecetteRealisee($d['idDepartement'], $periode['idPeriode']), 2); ?></td>
                         <td> - </td>
-                    <?php endforeach; ?>
+                <?php endforeach; ?>
             </tr>
             
             <tr class="solde-fin">

@@ -1,40 +1,6 @@
 <?php
   include("../../inc/connection.php");
-
-function ajoutCommandeAvecLignes($idClient, $lignesCommande, $montantTotal, $statut = 'EnAttente', $dateCommande=null) {
-    $con = dbConnect();
-
-    try {
-        $con->beginTransaction();
-
-        // Insérer la commande
-        $queryCommande = "INSERT INTO commandes (idClient, dateCommande, montantTotal, statut) VALUES (?, ?, ?, ?)";
-        $stmtCommande = $con->prepare($queryCommande);
-        $stmtCommande->execute([$idClient, $dateCommande, $montantTotal, $statut]);
-
-        $idCommande = $con->lastInsertId();
-
-        // Insérer les lignes de commande
-        $queryLigne = "INSERT INTO ligneCommandes (idCommande, idProduit, quantite, prixUnitaire) VALUES (?, ?, ?, ?)";
-        $stmtLigne = $con->prepare($queryLigne);
-
-        foreach ($lignesCommande as $ligne) {
-            $stmtLigne->execute([
-                $idCommande,
-                $ligne['idProduit'],
-                $ligne['quantite'],
-                $ligne['prixUnitaire']
-            ]);
-        }
-
-        $con->commit();
-        return true;
-
-    } catch (PDOException $e) {
-        $con->rollBack();
-        return false;
-    }
-}
+  include("../../inc/fonctionCommande.php");
 
 // Récupérer les données POST
 $idClient = $_POST['idClient'];
@@ -75,6 +41,7 @@ foreach ($produits as $index => $idProduit) {
 $success = ajoutCommandeAvecLignes($idClient, $lignesCommande, $montantTotal, $statut, $dateCommande);
 
 if ($success) {
+    insertCommandeInBudget($dateCommande, $montantTotal);
     header("Location: ../CRM-page.php?page=crm/ajout-commande&success=Commande ajoutée avec succès");
 } else {
     header("Location: ../CRM-page.php?page=crm/ajout-commande&erreur=Erreur lors de l'ajout");

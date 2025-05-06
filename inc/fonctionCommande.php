@@ -58,4 +58,82 @@
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    function getIdCtgCommandes(){
+        $conn = dbConnect();
+        $query = "SELECT idCategorie FROM categorie where types='Commandes' AND nature='Commandes Realisees'";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchColumn();
+        return $result;
+    }
+
+    function getIdPeriodeCommande($dateCommande) {
+        $con = dbConnect();
+        $stmt = $con->prepare("SELECT idPeriode FROM periode WHERE :dateAction BETWEEN dateDebut AND dateFin");
+        $stmt->execute([':dateAction' => $dateCommande]);
+        $periode = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if (!$periode) return false;
+    
+        $idPeriode = $periode['idPeriode'];
+        return $idPeriode;
+    }
+
+    function getCommandeById($idCommande) {
+        $con = dbConnect();
+        $stmt = $con->prepare("SELECT * FROM commandes WHERE idCommande=?");
+        $stmt->execute([$idCommande]);
+        $Commande = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $Commande;
+    }
+
+    function tokonyUpdate($dateCommande){
+        $con = dbConnect();
+        $idCategorie = getIdCtgCommandes();
+        $idPeriode =  getIdPeriodeCommande($dateCommande);
+        $stmt = $con->prepare("SELECT * FROM prevision WHERE idCategorie=? AND idPeriode=?");
+        $stmt->execute([$idCategorie, $idPeriode]);
+        $Ctg = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if(!empty($Ctg)){
+            return true;
+        }
+        return false;
+    }
+
+    function getDernierMontant($dateCommande){
+        $con = dbConnect();
+        $idCategorie = getIdCtgCommandes();
+        $idPeriode =  getIdPeriodeCommande($dateCommande);
+        $stmt = $con->prepare("SELECT realisation FROM prevision WHERE idCategorie=? AND idPeriode=?");
+        $stmt->execute([$idCategorie, $idPeriode]);
+        $montant = $stmt->fetchColumn();
+        return $montant;
+    }
+
+    function insertCommandeInBudget($dateCommande, $montantTotal) {
+        session_start();
+        $con = dbConnect();
+        $idDepartement = $_SESSION['id'];
+        $idPeriode = getIdPeriodeCommande($dateCommande);
+        $update = tokonyUpdate($dateCommande);
+        $idCtg = getIdCtgCommandes();
+
+        if($idPeriode!=false && !$update){
+            $stmt = $con->prepare("INSERT INTO prevision (idDepartement, idPeriode, idCategorie, prevision, realisation, valide)
+            VALUES (:idDepartement, :idPeriode, :idCategorie, :prevision, :realisation, 1)");
+                return $stmt->execute([
+                ':idDepartement' => $idDepartement,
+                ':idPeriode' => $idPeriode,
+                ':idCategorie' => $idCtg,
+                ':prevision' => 0,
+                ':realisation'=> $montantTotal
+            ]);
+        }
+        else if($idPeriode!=false && $update){
+            $dernierMontant = getDernierMontant($dateCommande);
+            $nouveau = $dernierMontant + $montantTotal;
+            $stmt = $con->prepare("UPDATE prevision SET realisation=? WHERE idCategorie=? AND idPeriode=?");
+            $stmt->execute([$nouveau, $idCtg, $idPeriode]);
+        }
+    }
 ?>
