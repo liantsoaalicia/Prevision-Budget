@@ -49,6 +49,7 @@
                     <button class="dropbtn">Commande</button>
                     <div class="dropdown-content">
                         <a href="CRM-page.php?page=crm/ajout-commande">Ajouter Commande</a>
+                        <a href="CRM-page.php?page=crm/liste-commande">Liste des commandes</a>
                     </div>
                 </li>
                 <li class="dropdown">

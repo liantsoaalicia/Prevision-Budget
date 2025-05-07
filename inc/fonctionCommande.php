@@ -136,4 +136,68 @@
             $stmt->execute([$nouveau, $idCtg, $idPeriode]);
         }
     }
+
+    
+    // Fonction pour récupérer toutes les commandes avec les détails du client
+    function getAllCommandes() {
+        // Connexion à la base de données
+        $connexion = new PDO('mysql:host=localhost;dbname=PrevisionBudget', 'root', '');
+        $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        // Requête pour récupérer les commandes avec les informations du client
+        $requete = $connexion->prepare("
+            SELECT c.idCommande, c.dateCommande, c.montantTotal, c.statut,
+                cl.idClient, cl.prenom, cl.nom
+            FROM commandes c
+            JOIN clients cl ON c.idClient = cl.idClient
+            ORDER BY c.dateCommande DESC
+        ");
+        
+        $requete->execute();
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Fonction pour récupérer les détails d'une commande spécifique
+    function getCommandeDetails($idCommande) {
+        // Connexion à la base de données
+        $connexion = new PDO('mysql:host=localhost;dbname=PrevisionBudget', 'root', '');
+        $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        // Requête pour récupérer les lignes de commande avec les détails du produit
+        $requete = $connexion->prepare("
+            SELECT lc.idLigneCommande, lc.quantite, lc.prixUnitaire, 
+                p.idProduit, p.nom as nomProduit, p.description
+            FROM ligneCommandes lc
+            JOIN produits p ON lc.idProduit = p.idProduit
+            WHERE lc.idCommande = :idCommande
+        ");
+        
+        $requete->bindParam(':idCommande', $idCommande, PDO::PARAM_INT);
+        $requete->execute();
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Récupérer toutes les commandes
+   
+
+    // Fonction pour formater le statut
+    function formatStatut($statut) {
+        switch ($statut) {
+            case 'EnAttente':
+                return '<span class="statut-attente">En Attente</span>';
+            case 'Terminee':
+                return '<span class="statut-terminee">Terminée</span>';
+            case 'Annulee':
+                return '<span class="statut-annulee">Annulée</span>';
+            default:
+                return $statut;
+        }
+    }
+
+    // Fonction pour formater la date
+    function formatDate($date) {
+        $timestamp = strtotime($date);
+        return date('d/m/Y H:i', $timestamp);
+    }
+
 ?>
