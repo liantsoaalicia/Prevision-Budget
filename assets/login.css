@@ -1,12 +1,18 @@
 :root {
-    --primary-color: #1A2A4F; /* Bleu nuit */
-    --secondary-color: #2C3E6F; /* Bleu clair */
-    --background-light: #FFFFFF; /* Blanc */
-    --background-gray: #F5F5F5; /* Gris clair */
-    --border-color: #E0E0E0; /* Gris moyen */
-    --text-dark: #1A2A4F; /* Bleu nuit pour le texte */
-    --text-light: #FFFFFF; /* Blanc pour le texte */
-    --text-gray: #9E9E9E; /* Gris foncé */
+    --primary-color: #573d34; /* Brun chocolat profond */
+    --secondary-color: #8D6E63; /* Brun chocolat clair */
+    --accent-color: #D7CCC8; /* Beige clair */
+    --background-light: #FFF;
+    --background-gray: #EFEBE9; /* Beige très clair */
+    --border-color: #D7CCC8; /* Beige moyen */
+    --border-dark: #A1887F; /* Brun moyen */
+    --text-dark: #3E2723; /* Brun très foncé */
+    --text-light: #FFF;
+    --text-gray: #8D6E63; /* Brun chocolat clair */
+    --success-color: #689F38; /* Vert naturel */
+    --warning-color: #FFA000; /* Orange doré */
+    --danger-color: #D32F2F; /* Rouge */
+    --info-color: #0288D1; /* Bleu */
 }
 
 .formulaire-login {

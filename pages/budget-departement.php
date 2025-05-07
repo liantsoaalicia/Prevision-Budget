@@ -65,7 +65,7 @@
             </tr>
             
             <?php if (!empty($categories['depenses'])): ?>
-                <tr><td colspan="<?= 1 + count($periodes) * 3 ?>"><strong>Dépenses</strong></td></tr>
+                <tr class="section-title"><td colspan="<?= 1 + count($periodes) * 3 ?>"><strong>Dépenses</strong></td></tr>
                 <?php
                 $types_depenses = [];
                 foreach ($categories['depenses'] as $cat) {
@@ -114,7 +114,7 @@
             
 
             <?php if (!empty($categories['recettes'])): ?>
-                <tr><td colspan="<?= 1 + count($periodes) * 3 ?>"><strong>Recettes</strong></td></tr>
+                <tr class="section-title"><td colspan="<?= 1 + count($periodes) * 3 ?>"><strong>Recettes</strong></td></tr>
                 <?php
                 $types_recettes = [];
                 foreach ($categories['recettes'] as $cat) {

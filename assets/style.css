@@ -1,20 +1,157 @@
-/* Variables de couleurs */
-:root {
-    --primary-color: #1A2A4F; /* Bleu nuit */
-    --secondary-color: #2C3E6F; /* Bleu clair */
-    --background-light: #FFFFFF; /* Blanc */
-    --background-gray: #F5F5F5; /* Gris clair */
-    --border-color: #E0E0E0; /* Gris moyen */
-    --text-dark: #1A2A4F; /* Bleu nuit pour le texte */
-    --text-light: #FFFFFF; /* Blanc pour le texte */
-    --text-gray: #9E9E9E; /* Gris foncé */
-}
-
 /* Réinitialisation générale */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* Variables de couleurs thématique cacao */
+:root {
+    --primary-color: #573d34; /* Brun chocolat profond */
+    --secondary-color: #8D6E63; /* Brun chocolat clair */
+    --accent-color: #D7CCC8; /* Beige clair */
+    --background-light: #FFF;
+    --background-gray: #EFEBE9; /* Beige très clair */
+    --border-color: #D7CCC8; /* Beige moyen */
+    --border-dark: #A1887F; /* Brun moyen */
+    --text-dark: #3E2723; /* Brun très foncé */
+    --text-light: #FFF;
+    --text-gray: #8D6E63; /* Brun chocolat clair */
+    --success-color: #689F38; /* Vert naturel */
+    --warning-color: #FFA000; /* Orange doré */
+    --danger-color: #D32F2F; /* Rouge */
+    --info-color: #0288D1; /* Bleu */
+}
+
+/* Styles spécifiques pour le tableau de budget */
+.budget-table {
+    margin: 2rem 0;
+    overflow-x: auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    background-color: var(--background-light);
+    border: 1px solid var(--border-color);
+}
+
+.table-budget {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    min-width: 1000px;
+}
+
+.table-budget th, 
+.table-budget td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.table-budget th {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+}
+
+/* Titres Dépenses/Recettes alignés à gauche */
+.table-budget .section-title td {
+    text-align: left;
+    background-color: var(--background-gray);
+    font-weight: bold;
+    color: var(--primary-color);
+    padding-left: 15px;
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Styles pour les lignes */
+.table-budget .type-depense td,
+.table-budget .type-recette td {
+    background-color: var(--background-gray);
+    font-weight: 600;
+    color: var(--primary-color);
+    text-align: left;
+    padding-left: 30px;
+}
+
+.table-budget .nature-depense td:first-child,
+.table-budget .nature-recette td:first-child {
+    text-align: left;
+    padding-left: 45px;
+    font-style: italic;
+    color: var(--text-dark);
+}
+
+/* Couleurs thématiques pour les sections */
+.table-budget .total-depense {
+    background-color: rgba(141, 110, 99, 0.1); /* Brun clair transparent */
+    font-weight: 600;
+    border-top: 2px solid var(--secondary-color);
+}
+
+.table-budget .total-recette {
+    background-color: rgba(215, 204, 200, 0.3); /* Beige transparent */
+    font-weight: 600;
+    border-top: 2px solid var(--accent-color);
+}
+
+.table-budget .solde-debut {
+    background-color: rgba(93, 64, 55, 0.05);
+    font-weight: 600;
+}
+
+.table-budget .solde-fin {
+    background-color: rgba(93, 64, 55, 0.1);
+    font-weight: 600;
+    border-top: 2px solid var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* Styles pour les colonnes spécifiques */
+.table-budget td:nth-child(3n+2) { /* Colonnes Prévision */
+    background-color: rgba(215, 204, 200, 0.1);
+}
+
+.table-budget td:nth-child(3n+3) { /* Colonnes Réalisation */
+    background-color: rgba(141, 110, 99, 0.05);
+}
+
+.table-budget td:nth-child(3n+4) { /* Colonnes Ecart */
+    background-color: rgba(93, 64, 55, 0.03);
+    font-weight: 500;
+}
+
+/* Style pour les écarts */
+.table-budget .ecart-positif {
+    color: var(--success-color);
+    font-weight: 600;
+}
+
+.table-budget .ecart-negatif {
+    color: var(--danger-color);
+    font-weight: 600;
+}
+
+/* Style pour le titre du département */
+.departements-container h2 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-dark);
+}
+
+/* Style responsive */
+@media (max-width: 768px) {
+    .table-budget {
+        font-size: 0.8rem;
+    }
+    
+    .table-budget th, 
+    .table-budget td {
+        padding: 8px 10px;
+    }
 }
 
 /* Styles généraux */
@@ -339,34 +476,3 @@ button:hover {
     font-size: 14px;
 }
 
-.depense {
-    background-color: #ffebee; 
-    border-left: 4px solid #ef5350; 
-}
-
-.recette {
-    background-color: #e8f5e9; 
-    border-left: 4px solid #66bb6a; 
-}
-
-.total-depense {
-    background-color: #ffcdd2; 
-    font-weight: bold;
-}
-
-.total-recette {
-    background-color: #c8e6c9; 
-    font-weight: bold;
-}
-
-.solde-debut {
-    background-color: #e3f2fd; 
-    border-left: 4px solid #42a5f5; 
-    font-weight: bold;
-}
-
-.solde-fin {
-    background-color: #fff3e0; 
-    border-left: 4px solid #ff9800; 
-    font-weight: bold;
-}
