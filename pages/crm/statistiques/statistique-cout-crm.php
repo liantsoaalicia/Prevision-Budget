@@ -142,8 +142,8 @@ foreach ($stats['par_type'] as $stat) {
                 <div style="min-width: 200px; margin: 10px; padding: 15px; background-color: <?= $ecartPourcentage <= 0 ? 'rgba(75, 192, 192, 0.1)' : 'rgba(255, 159, 64, 0.1)' ?>; border-radius: 5px;">
                     <h3>Écart</h3>
                     <p style="font-size: 24px; font-weight: bold; color: <?= $ecartPourcentage <= 0 ? 'green' : 'orange' ?>">
-                        <?= number_format($stats['total_realisation'] - $stats['total_prevision'], 2, ',', ' ') ?> 
-                        (<?= $ecartPourcentage ?>%)
+                        <?= number_format(abs($stats['total_realisation'] - $stats['total_prevision']), 2, ',', ' ') ?> 
+                        (<?= abs($ecartPourcentage) ?>%)
                     </p>
                 </div>
             </div>
