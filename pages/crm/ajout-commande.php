@@ -26,7 +26,7 @@ $produits = getAllProduits();
                     <option value="">-- Sélectionnez un produit --</option>
                     <?php foreach ($produits as $produit): ?>
                         <option value="<?= $produit['idProduit'] ?>">
-                            <?= $produit['nom'] ?> (<?= $produit['prix'] ?> €)
+                            <?= $produit['nom'] ?> (<?= $produit['prix'] ?> Ariary)
                         </option>
                     <?php endforeach; ?>
                 </select>
