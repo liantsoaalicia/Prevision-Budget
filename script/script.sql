@@ -177,6 +177,9 @@ CREATE TABLE tickets (
     FOREIGN KEY (idStatus) REFERENCES status_ticket(idStatus)
 );
 
+ALTER TABLE tickets
+ADD COLUMN clientHasResponded BOOLEAN DEFAULT FALSE;
+
 CREATE TABLE ticket_status_history (
     idHistory INT AUTO_INCREMENT PRIMARY KEY,
     idTicket INT,
