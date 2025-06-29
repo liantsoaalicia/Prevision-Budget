@@ -20,13 +20,8 @@
         
         <form action="traitement-login.php" method="post">
             <label for="nom">
-                Nom 
-                <select name="idDepartement" id="nom">
-                    <option value="#">Selectionnez un departement</option>
-                    <?php foreach($departements as $d) { ?>
-                        <option value="<?= $d['idDepartement'] ?>"><?= $d['nom'] ?></option>
-                    <?php } ?>
-                </select>
+                Nom d'utilisateur <br>
+                <input type="text" name="nom" id="nom">
             </label>
             
             <label for="mdp">
@@ -36,7 +31,6 @@
             
             <button type="submit">Se connecter</button>
         </form>
-     
 
     <div class="importcsv-departement">
         <h2>Importer un fichier CSV</h2>

@@ -11,11 +11,10 @@ function insertClient($prenom, $nom, $email, $age, $sexe, $classe, $dateInscript
     $stmt->bindParam(':age', $age, PDO::PARAM_INT);
     $stmt->bindParam(':sexe', $sexe, PDO::PARAM_STR);
     $stmt->bindParam(':classe', $classe, PDO::PARAM_STR);
-    $stmt->bindParam(':dateInscription', $dateInscription, PDO::PARAM_STR); // Ajout de la date
+    $stmt->bindParam(':dateInscription', $dateInscription, PDO::PARAM_STR); 
 
     return $stmt->execute();
 }
-
 
 
 function C_getAllClients() {

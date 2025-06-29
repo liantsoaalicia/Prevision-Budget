@@ -2,12 +2,13 @@
 
     session_start();
     include('../inc/fonctions.php');
-    $id = $_POST['idDepartement'];
+    $nom = $_POST['nom'];
     $mdp = $_POST['mdp'];
 
-    $log = login($id, $mdp);
-    if($log == 1) {
-        $_SESSION['id'] = $id;
+    $log = login($nom, $mdp);
+    var_dump($log);
+    if($log[0] == 1) {
+        $_SESSION['id'] = $log[1];
         header('Location:template.php?page=accueil');
         exit();
     } else {

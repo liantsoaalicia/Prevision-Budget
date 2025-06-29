@@ -27,12 +27,12 @@ INSERT INTO categorieProduit (nom) VALUES
 ('Pâtisseries');
 
 INSERT INTO produits (nom, description, idCategorie, prix, quantiteStock) VALUES 
-('Tablette de chocolat noir', 'Chocolat noir pur à 70%', 1, 4.50, 100);
+('Tablette de chocolat noir', 'Chocolat noir pur à 70%', 1, 5000, 100);
 INSERT INTO produits (nom, description, idCategorie, prix, quantiteStock) VALUES 
-('Savon au beurre de cacao', 'Savon naturel hydratant pour la peau', 2, 3.90, 50),
-('Boisson cacao glacée', 'Boisson rafraîchissante au cacao', 3, 2.00, 200),
-('Crème visage cacao', 'Crème nourrissante pour le visage', 2, 7.50, 30),
-('Tarte au cacao', 'Pâtisserie artisanale au cacao', 5, 5.00, 20);
+('Savon au beurre de cacao', 'Savon naturel hydratant pour la peau', 2, 3900, 50),
+('Boisson cacao glacée', 'Boisson rafraîchissante au cacao', 3, 20000, 200),
+('Crème visage cacao', 'Crème nourrissante pour le visage', 2, 75000, 30),
+('Tarte au cacao', 'Pâtisserie artisanale au cacao', 5, 15000, 20);
 
 INSERT INTO clients (prenom, nom, email, age, sexe, classe) VALUES 
 ('Jean', 'Randri', 'jean.randri@example.com', 28, 'Homme', 'moyen'),
@@ -44,3 +44,7 @@ INSERT INTO clients (prenom, nom, email, age, sexe, classe) VALUES
 -- Pour mettre la commande dans le budget
 INSERT INTO categorie(categorie, types, nature) VALUES
 ('Recette', 'Vente', 'Vente des produits a base de cacao');
+
+ALTER TABLE departement DROP COLUMN mdp;
+
+INSERT INTO user(nom, mdp, idDepartement) VALUES ('randie', 'r123', 3);

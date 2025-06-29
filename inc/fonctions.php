@@ -11,17 +11,34 @@
         return $departements;
     }
 
-    function login($idDepartement, $mdp) {
+    function login($nom, $mdp) {
         $con = dbConnect();
-        $query = "SELECT * FROM departement WHERE idDepartement = :idDepartement";
-        $stmt = $con->prepare($query);
-        $stmt->bindParam('idDepartement', $idDepartement, PDO::PARAM_INT);
-        $stmt->execute();
-        $departement = $stmt->fetch(PDO::FETCH_ASSOC);
+        // $query = "SELECT * FROM departement WHERE idDepartement = :idDepartement";
+        // $stmt = $con->prepare($query);
+        // $stmt->bindParam('idDepartement', $idDepartement, PDO::PARAM_INT);
+        // $stmt->execute();
+        // $departement = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if($departement) {
-            if($mdp == $departement['mdp']) {
-                return 1;
+        // if($departement) {
+        //     if($mdp == $departement['mdp']) {
+        //         return 1;
+        //     } else {
+        //         return "Mot de passe incorrect";
+        //     }
+        // }
+        $query = "SELECT * FROM user WHERE nom=?";
+        $stmt = $con->prepare($query);
+        // $stmt->bindParam('nom', $nom, PDO::PARAM_STR);
+        $stmt->execute([$nom]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $response = [];
+        
+        if($user) {
+            if($mdp == $user['mdp']) {
+                echo 'ATOO';
+                $response[0] = 1;
+                $response[1] = $user['idDepartement'];
+                return $response;
             } else {
                 return "Mot de passe incorrect";
             }
@@ -274,7 +291,11 @@
         $stmt->execute([':dateAction' => $dateAction]);
         $periode = $stmt->fetch(PDO::FETCH_ASSOC);
     
-        if (!$periode) return false;
+        if (!$periode) 
+        {
+            echo 'FAL';
+            return false;
+        }
     
         $idPeriode = $periode['idPeriode'];
     

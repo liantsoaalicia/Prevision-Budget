@@ -2,10 +2,21 @@ DROP DATABASE PrevisionBudget;
 CREATE DATABASE PrevisionBudget;
 USE PrevisionBudget;
 
+-- CREATE TABLE departement (
+--     idDepartement INT AUTO_INCREMENT PRIMARY KEY,
+--     nom VARCHAR(150),
+--     mdp VARCHAR(50)
+-- );
 CREATE TABLE departement (
     idDepartement INT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(150),
-    mdp VARCHAR(50)
+    nom VARCHAR(150)
+);
+
+CREATE TABLE user (
+    idUser INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100),
+    mdp VARCHAR(20),
+    idDepartement INT REFERENCES departement(idDepartement)
 );
 
 CREATE TABLE periode (
@@ -113,7 +124,7 @@ CREATE TABLE actionsCrm (
     dateAction DATETIME,
     coutsPrevision FLOAT,
     coutsRealisation FLOAT,
-    validationFinance Boolean,
+    validationFinance BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (idDepartement) REFERENCES departement(idDepartement),
     FOREIGN KEY (idEvenement) REFERENCES evenement(idEvenement)
 );
@@ -136,17 +147,6 @@ CREATE TABLE retoursClients (
     FOREIGN KEY (idCommande) REFERENCES commandes(idCommande)
 );
 
+-- TICKET
 
-DROP TABLE solde;
-DROP TABLE prevision;
-DROP TABLE categorie;
-DROP TABLE periode;
-DROP TABLE departement;
-DROP TABLE clients;
-DROP TABLE categorieProduit;
-DROP TABLE produits;
-DROP TABLE commandes;
-DROP TABLE ligneCommandes;
-DROP TABLE actionsCrm;
-DROP TABLE reactionActionCrm;
-DROP TABLE retoursClients;
+CREATE TABLE 

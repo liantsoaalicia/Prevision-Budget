@@ -26,7 +26,7 @@
                         echo '<td>' . htmlspecialchars($action['dateAction']) . '</td>';
                         echo '<td>' . htmlspecialchars($action['coutsPrevision']) . '</td>';
                         echo '<td class="actions">';
-                        echo '<a href="crm/traitement-valider-action-crm.php?id=' . $action['idAction'] . '" class="icones">';
+                        echo '<a href="crm/traitement-valider-action-crm.php?id='.$action['idAction'].'" class="icones">';
                         echo '    <img src="../assets/icon/valid.jpg" alt="Valider">';
                         echo '</a>';
                         echo '</td>';

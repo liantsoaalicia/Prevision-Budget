@@ -124,7 +124,7 @@
                 return $stmt->execute([
                 ':idDepartement' => $idDepartement,
                 ':idPeriode' => $idPeriode,
-                ':idCategorie' => $idCtg,
+                ':idCategorie' => 1,
                 ':prevision' => 0,
                 ':realisation'=> $montantTotal
             ]);
