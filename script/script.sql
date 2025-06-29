@@ -149,4 +149,75 @@ CREATE TABLE retoursClients (
 
 -- TICKET
 
-CREATE TABLE 
+-- Table des statuts de ticket
+CREATE TABLE status_ticket (
+    idStatus INT AUTO_INCREMENT PRIMARY KEY,
+    libelle VARCHAR(50) -- Exemple: Ouvert, En cours, Résolu, Fermé
+);
+
+-- Table des agents
+CREATE TABLE agents (
+    idAgent INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100),
+    email VARCHAR(100),
+    coutHoraire DECIMAL(10,2)
+);
+
+-- Table des tickets
+CREATE TABLE tickets (
+    idTicket INT AUTO_INCREMENT PRIMARY KEY,
+    idClient INT,
+    idStatus INT,
+    sujet VARCHAR(255),
+    description TEXT,
+    priorite ENUM('basse', 'normale', 'haute'),
+    fichier VARCHAR(255),
+    dateCreation DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (idClient) REFERENCES clients(idClient),
+    FOREIGN KEY (idStatus) REFERENCES status_ticket(idStatus)
+);
+
+CREATE TABLE ticket_status_history (
+    idHistory INT AUTO_INCREMENT PRIMARY KEY,
+    idTicket INT,
+    idStatus INT,
+    dateChangement DATETIME DEFAULT CURRENT_TIMESTAMP,
+    commentaire TEXT, -- optionnel : ex. raison du changement de statut
+    FOREIGN KEY (idTicket) REFERENCES tickets(idTicket),
+    FOREIGN KEY (idStatus) REFERENCES status_ticket(idStatus)
+);
+
+-- Table de liaison ticket <-> agent (un ticket peut être attribué à un agent)
+CREATE TABLE agent_ticket (
+    idAgent INT,
+    idTicket INT,
+    dateAffectation DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (idAgent, idTicket),
+    FOREIGN KEY (idAgent) REFERENCES agents(idAgent),
+    FOREIGN KEY (idTicket) REFERENCES tickets(idTicket)
+);
+
+-- Table des évaluations de tickets
+CREATE TABLE evaluation_ticket (
+    idEvaluation INT AUTO_INCREMENT PRIMARY KEY,
+    idTicket INT,
+    note INT CHECK (note >= 1 AND note <= 5),
+    commentaire TEXT,
+    dateEvaluation DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (idTicket) REFERENCES tickets(idTicket)
+);
+
+-- Table des messages dans une discussion
+CREATE TABLE discussion_ticket (
+    idMessage INT AUTO_INCREMENT PRIMARY KEY,
+    idTicket INT,
+    auteur ENUM('client', 'agent'),
+    idClient INT NULL, -- pour les messages côté client
+    idAgent INT NULL,  -- pour les messages côté agent
+    message TEXT,
+    fichier VARCHAR(255),
+    dateMessage DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (idTicket) REFERENCES tickets(idTicket),
+    FOREIGN KEY (idClient) REFERENCES clients(idClient),
+    FOREIGN KEY (idAgent) REFERENCES agents(idAgent)
+);
