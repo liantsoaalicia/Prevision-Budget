@@ -1,8 +1,9 @@
-INSERT INTO departement(nom, mdp) VALUES 
-('Departement Administration', 'admin'),
-('Departement Maintenance', 'maintenance'),
-('Departement Finance', 'finance'),
-('Departement Marketing', 'marketing');
+INSERT INTO departement(nom)
+VALUES
+('Departement Administration'),
+('Departement Maintenance'),
+('Departement Finance'),
+('Departement Marketing');
 
 INSERT INTO periode(nom, dateDebut, dateFin) VALUES
 ('Periode 1', '2025-01-01', '2025-01-31'),
@@ -48,3 +49,39 @@ INSERT INTO categorie(categorie, types, nature) VALUES
 ALTER TABLE departement DROP COLUMN mdp;
 
 INSERT INTO user(nom, mdp, idDepartement) VALUES ('randie', 'r123', 3);
+
+--Ticket
+INSERT INTO status_ticket(libelle) VALUES
+('Arrive'),
+('Ouvert'),
+('En cours'),
+('Résolu'),
+('Fermé');
+
+INSERT INTO tickets (idClient, idStatus, sujet, description, priorite, fichier, clientHasResponded)
+VALUES 
+(1, 1, 'Problème de connexion', 'Le client ne peut pas se connecter à son compte.', 'haute', NULL, FALSE),
+(2, 1, 'Erreur de facturation', 'Le montant facturé ne correspond pas au devis.', 'normale', 'facture_client2.pdf', FALSE),
+(3, 1, 'Demande de modification', 'Le client souhaite changer ladresse de livraison.', 'basse', NULL, FALSE),
+(4, 1, 'Site indisponible', 'Le site web est inaccessible depuis ce matin.', 'haute', NULL, FALSE),
+(5, 1, 'Assistance installation', 'Le client a besoin daide pour installer le logiciel.', 'normale', 'capture_installation.png', FALSE);
+
+INSERT INTO ticket_status_history (idTicket, idStatus, commentaire) VALUES
+(1, 1, 'Ticket créé et en attente de traitement.'),
+(2, 1, 'Ticket créé et en attente de traitement.'),
+(3, 1, 'Ticket créé et en attente de traitement.'),
+(4, 1, 'Ticket créé et en attente de traitement.'),
+(5, 1, 'Ticket créé et en attente de traitement.');
+
+INSERT INTO agents (nom, email, coutHoraire) VALUES
+('Alice Rakoto', 'alice.rakoto@example.com', 150000),
+('Bob Randria', 'bob.randria@example.com', 100000),
+('Carine Rasoa', 'carine.rasoa@example.com', 120000);
+
+INSERT INTO agent_ticket (idAgent, idTicket) VALUES
+(1, 1), -- Alice gère le ticket 1
+(2, 2), -- Bob gère le ticket 2
+(3, 3), -- Carine gère le ticket 3
+(1, 4), -- Alice gère aussi le ticket 4
+(2, 5); -- Bob gère le ticket 5
+

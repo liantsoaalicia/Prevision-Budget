@@ -3,6 +3,7 @@
     include('../inc/fonctions.php');
     include('../inc/fonctionCommande.php');
     include('../inc/fonctionEvenement.php');
+    include('../inc/fonctionTicket.php');
     $page = "accueil";
     if(isset($_GET['page'])){
         $page = $_GET['page'];
@@ -168,6 +169,16 @@
                 <div class="dropdown-container">
                     <a href="CRM-page.php?page=crm/ajout-action-crm">Ajouter action</a>
                     <a href="CRM-page.php?page=crm/ajout-evenement">Ajouter événement</a>
+                    <?php if($isItFinance){ ?>
+                        <a href="CRM-page.php?page=crm/valider-action-crm">Valider des actions</a>
+                    <?php } ?>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <button class="dropdown-btn">Ticket ▼</button>
+                <div class="dropdown-container">
+                    <a href="CRM-page.php?page=ticket/statut-ticket">Status Ticket</a>
                     <?php if($isItFinance){ ?>
                         <a href="CRM-page.php?page=crm/valider-action-crm">Valider des actions</a>
                     <?php } ?>
