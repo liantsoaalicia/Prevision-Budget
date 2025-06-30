@@ -179,9 +179,8 @@
                 <button class="dropdown-btn">Ticket ▼</button>
                 <div class="dropdown-container">
                     <a href="CRM-page.php?page=ticket/statut-ticket">Status Ticket</a>
-                    <?php if($isItFinance){ ?>
-                        <a href="CRM-page.php?page=crm/valider-action-crm">Valider des actions</a>
-                    <?php } ?>
+                    <a href="CRM-page.php?page=ticket/creation-ticket">Creation ticket</a>
+                    <a href="CRM-page.php?page=ticket/assignation-ticket">Assignation d'un ticket</a>
                 </div>
             </li>
             

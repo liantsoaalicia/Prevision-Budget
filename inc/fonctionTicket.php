@@ -1,5 +1,6 @@
 <?php
-    
+    // include('connection.php');
+
     function getAllTickets() {
         $con = dbConnect();
         $query = "SELECT t.*, COALESCE(at.idAgent, 0) AS idAgent
@@ -7,7 +8,6 @@
               LEFT JOIN agent_ticket at ON t.idTicket = at.idTicket";
         $stmt = $con->prepare($query);
         $stmt->execute();
-
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
@@ -81,4 +81,69 @@
 
     
    
+    function insertTicket($idClient, $sujet, $description, $priorite, $fichier) {
+        $con = dbConnect();
+        $query = "INSERT INTO tickets (idClient, idStatus, sujet, description, priorite, fichier) 
+                    VALUES (:idClient, 1, :sujet, :description, :priorite, :fichier)";
+        $stmt = $con->prepare($query);
+        $stmt->bindParam(':idClient', $idClient);
+        $stmt->bindParam(':sujet', $sujet);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':priorite', $priorite);
+        $stmt->bindParam(':fichier', $fichier);
+        return $stmt->execute();
+    }
+
+    function uploadFichier($inputName) {
+        if (!isset($_FILES[$inputName]) || $_FILES[$inputName]['error'] !== UPLOAD_ERR_OK) {
+            return ['success' => false, 'message' => 'Aucun fichier envoyé ou erreur lors de l\'upload.'];
+        }
+
+        $uploadDir = __DIR__ . '/upload/';
+        // var_dump("Chemin complet du dossier upload: " . $uploadDir); 
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        $fileTmpPath = $_FILES[$inputName]['tmp_name'];
+        $fileName = $_FILES[$inputName]['name'];
+        $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+        $newFileName = uniqid('file_', true) . '.' . $fileExtension;
+        $destination = $uploadDir . $newFileName;
+
+        if (move_uploaded_file($fileTmpPath, $destination)) {
+            return ['success' => true, 'message' => 'Fichier uploadé avec succès.', 'filename' => $newFileName];
+        } else {
+            return ['success' => false, 'message' => 'Erreur lors du déplacement du fichier.'];
+        }
+    }
+
+    function getAllAgents() {
+        $con = dbConnect();
+        $query = "SELECT * FROM agents";
+        $stmt = $con->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    function assignTicketToAgent($idAgent, $idTicket) {
+        $con = dbConnect();
+        $query = "INSERT INTO agent_ticket (idAgent, idTicket) 
+                    VALUES (:idAgent, :idTicket)";
+        $stmt = $con->prepare($query);
+        $stmt->bindParam(':idAgent', $idAgent);
+        $stmt->bindParam(':idTicket', $idTicket);
+        return $stmt->execute();
+    }
+
+   function getAgentById($idAgent) {
+        $con = dbConnect();
+        $query = "SELECT * FROM agents WHERE idAgent = :idAgent";
+        $stmt = $con->prepare($query);
+        $stmt->bindParam(':idAgent', $idAgent);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 ?>

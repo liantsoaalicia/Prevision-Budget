@@ -247,3 +247,4 @@ DROP FOREIGN KEY discussion_ticket_ibfk_1;
 
 ALTER TABLE discussion_ticket
 DROP COLUMN idTicket;
+

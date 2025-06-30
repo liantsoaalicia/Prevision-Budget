@@ -1,0 +1,1426 @@
+Action_plan: to store the action plans of a scout meetin of some activity field
+ Constraints
+
+- **Database**
+    - activity_field_id: fk references Activity_field(id)
+    - detail_activity_plan_id:  fk references Detail_activity_plan(id)
+    - activity_field_section_id: fk references Activity_field_section(id)
+- **Code**
+    - activity_field_id: Many to One Activity_field
+    - detail_activity_plan_id: Many to One Detail_activity_plan
+    - activity_field_section_id: Many to One  Activity_field_section
+    - Action_plan_talent_goal : One to Many
+    - Activity_process: One to Many
+    - Action_plan_goal : One to Many
+Data sample
+id
+activity_field_id
+detail_activity_plan_id
+participants
+topic
+place
+stage
+rules
+duration (mn)
+other_goals
+deleted_at
+activity_field_section_id
+
+Action_plan_goal: to store every education goal for an action plan
+# Constraints
+
+- **Database**
+    - action_plan_id: fk references Action_plan(id)
+    - education_goal_id: fk references Education_goal(id)
+- **Code**
+    - action_plan_id: many to one Action_plan
+    - education_goal_id: many to one Education_goal
+Data sample
+id
+action_plan_id
+education_goal_id
+deleted_at
+
+Action_plan_talent_goal: to store every talent goal for an action plan
+# Constraints
+
+- **Database**
+    - action_plan_id: fk references Action_plan(id)
+    - talent_goal_id: fk references Talent_goal(id)
+- **Code**
+    - action_plan_id: many to one Action_plan
+    - talent_goal_id: many to one Talent_goal
+
+# Data sample
+id
+action_plan_id
+talent_goal_id
+deleted_at
+
+Activity_attendance:to store members who was present during a meeting
+# Constraints
+
+- **Database**
+    - member_id: fk references Member(id)
+    - action_plan_id: fk references Action_plan(id)
+- **Code**
+    - member_id: many to many Member
+    - action_plan_id: many to one Action_plan
+
+# Data sample
+id
+member_id
+action_plan_id
+note
+deleted_at
+
+Activity_field:to store existing hierarchies in the scout association
+# Constraints
+
+- **Code**
+    - stage_superior : fk references stage(id)
+    - hierarchy_id: fk references hierarchy(id)
+- **database**
+    - stage_superior: many to many Stage
+    - hierarchy_id: many to one Hierarchy
+
+# Data sample
+id
+number
+name
+stage_superior
+place
+entity
+hierarchy_id
+deleted_at
+1
+XIII
+St Michel
+2
+Amparibe
+St Michel Amparibe
+4 (Fivondronana)
+null
+
+Activity_field_section: to store every section in an activity field
+# Constraints
+
+- **Database**
+    - activity_field_id: fk references Activity_field
+    - section_id: fk references Section
+- **Code**
+    - activity_field_id: many to one Activity_field
+    - section_id: many to one Section
+
+# Data sample
+id
+activity_field_id
+section_id
+deleted_at
+1
+1
+1
+null
+2
+1
+2
+null
+
+Activity_plan: to store the activity plan for an activity field of a section of an activity field
+# Constraints
+
+- **Database**
+    - activity_year_id: fk references Activity_year(id)
+    - activity_field_id: fk references Activity_field(id)
+        - can be null
+    - activity_field_section_id: fk references Activity_field_section_id(id)
+        - can be null
+- **Code**
+    - activity_year_id: many to one Activity_year
+    - activity_field_id: many to one Activity_field
+    - activity_field_section_id: many to one Activity_field_section
+
+# Data sample
+id
+activity_year_id
+activity_field_id
+activity_field_section_id
+start_month
+end_month
+status
+note
+purpose
+deleted_at
+1
+1
+1
+null
+1
+12
+0
+…
+…
+null
+2
+1
+null
+2
+3
+6
+1
+…
+…
+null
+
+Activity_process: to store every processes during a scout activity
+# Constraints
+
+- **Database**
+    - process_type_id : fk references  Process_type(id)
+    - action_plan_id :  fk references  Action_plan (id)
+- **Code**
+    - action_plan_id : Many to One Action_plan
+    - process_type_id:  Many to One Process_type
+    - Activity_process_detail : One to Many
+
+# Data sample
+id
+process_type_id
+action_plan_id
+duration(mn)
+note
+deleted_at
+1
+1(Mialoha)
+1
+15
+2
+2(Mandritra)
+1
+40
+3
+3(Aoriana)
+1
+10
+
+Activity_process_detail: to store every process details during a scout activity
+# Constraints
+
+- **Database**
+    - activity_process_id : fk references Activity_process ( id )
+- **Code**
+    - activity_process_id : Many to One Activity_process
+
+# Data sample
+id
+activity_process_id
+process
+deleted_at
+1
+1(Mialoha)
+Rassemblementt
+null
+2
+1(Mialoha)
+Mivavaka
+null
+3
+1(Mialoha)
+manao presence
+null
+
+Activity_year: to store the years limits of every activity year
+# Constraints
+
+- **Code**
+    - member_activity: one to many
+    - membership_fee: one to many
+
+# Data sample
+id
+start_year
+end_year
+note
+deleted_at
+1
+2018
+2019
+Periode de covid
+null
+2
+2019
+2020
+null
+
+Adult_info: to store additional information of adult scout members
+# Constraints
+
+- **code**
+    - member_id: many to one Member
+- **database**
+    - member_id : fk references member(id)
+    - profession and company_name : null if the adult is a student
+    - school_name and scholl-level : null if the adult already works
+
+# Data sample
+id
+member_id
+martial_status
+child_number
+profession
+company_name
+school_name
+school_level
+mail
+facebook
+church_activities
+church_association
+deleted_at
+1
+1
+false (not married ) - true ( married)
+0 
+secretary
+Telma Antaninarenina
+ITU Andoharanofotsy
+L3
+soaornella5@gmail.com
+Soatoavina Koloina
+mpampianatra katesizy
+IRAKA
+null
+
+Detail_activity_plan: to store the details of each activity for an activity plan
+# Constraints
+
+- **Database**
+    - activity_plan_id: fk references Activity_plan(id)
+- **Code**
+    - activity_plan_id: many to one Activity_plan
+
+# Data sample
+id
+activity_name
+participants
+activity_plan_id
+ressource_persons
+ressource_tools
+ressource_money
+place
+success_rate
+blocking
+date
+other_goals
+deleted_at
+1
+Lalao momba ny biby
+LVT
+1
+Tonia 1, Mpanabe
+10 000Ar
+St Michel
+Mahafantatra karazam-biby 10 ny Lovitao
+18/10/22
+mahay miara-miaina @ olona
+null
+
+Detail_activity_plan_goal: to store every education goal for an activity plan details
+# Constraints
+
+- **Database**
+    - detail_activity_plan_id: fk references Action_plan(id)
+    - education_goal_id: fk references Education_goal(id)
+- **Code**
+    - detail_activity_plan_id: many to oneDetail_acticity_plan(id)
+    - education_goal_id: many to one Education_goal
+
+# Data sample
+id
+detail_activity_plan_id
+education_goal_id
+deleted_at
+1
+1
+1
+null
+2
+1
+2
+null
+
+Detail_activity_plan_responsible: to store every responsible for a detail activity plan
+# Constraints
+
+- **Database**
+    - detail_activity_plan_id: fk references Detail_activity_plan(id)
+    - adult_info_id: fk references Adult_info(id)
+- **Code**
+    - detail_activity_plan_id: many to one Detail_activity_plan
+    - adult_info_id: many to many Adult_info
+
+# Data sample
+id
+detail_activity_plan_id
+adult_info_id
+deleted_at
+1
+1
+1
+null
+2
+1
+2
+null
+
+Detail_activity_plan_talent_goal: to store every talent goal for an  activity plan details
+# Constraints
+
+- **Database**
+    - detail_activity_plan_id: fk references Detail_activity_plan(id)
+    - talent_goal_id: fk references Talent_goal(id)
+- **Code**
+    - detail_activity_plan_id: many to one  Detail_activity_plan
+    - talent_goal_id: many to one Talent_goal
+
+# Data sample
+id
+ detail_activity_plan_plan_id
+talent_goal_id
+deleted_at
+1
+1
+1
+null
+2
+1
+2
+null
+
+Education_field: to store the education objectives linked to the education field by section step
+# Constraints
+
+- **Code**
+    - Education_goal: one to many
+
+# Data sample
+id
+name
+note
+deleted_at
+1
+Fanahy
+….
+null
+2
+Saina
+….
+null
+3
+Vatana
+….
+null
+4
+Fo
+….
+null
+5
+Fifandraisana @ hafa
+….
+null
+6
+Toetra
+….
+null
+
+Education_goal: VHT ⇒ Teti-pibeazana: vikina, sedra, …
+# Constraints
+
+- **Database**
+    - Section_step_id: fk references Section_step (id)
+    - Education_field_id :  fk references Education_field (id)
+- **Code**
+    - Action_plan_goal : One to Many
+    - Section_step_id: Many to One Section_step
+    - Education_field_id : Many to One Education_field
+
+# Data sample
+id
+section_step_id
+education_field_id
+education_goal
+deleted_at
+1
+1(Miana-mandady)
+1 (Toetra)
+Mahalala fomba
+null - 12/12/2024
+
+Fee_type: to store the different types of fees to be paid in the scout community
+# Constraints
+
+- **Code**
+    - Membership_fee : one to many
+    - Payment_detail : one to many
+    - Activity_field_id: many to one Activity_field
+- **Database**
+    - Activity_field_id: fk references to Activity_field(id)
+
+# Data sample
+id
+name
+note
+deleted_at
+Activity_field_id
+1
+Assurance
+…
+null
+null
+2
+Cotisation
+…
+null
+1
+
+Group_section: to store every group of an activity field
+# Constraints
+
+- **Database**
+    - activity_field_section_id: fk references activity_field_section(id)
+- **Code**
+    - activity_field_section_id: many to one activity_field_section
+
+# Data sample
+id
+name
+note
+activity_field_section_id
+deleted_at
+1
+Masoandro
+1
+null
+2
+Kintana
+2
+12-12-2023
+
+Hierarchy: to store the different types of hierarchy
+# Constraints
+
+- **code**
+    - Stage : One to Many
+
+# Data sample
+id
+name
+note
+deleted_at
+level
+1
+Nationaly
+null
+1
+2
+Diosezy
+null
+2
+3
+Faritra
+null
+3
+4
+Fivondronana
+null
+4
+
+Member: to store scout member information
+# Constraints
+
+- Code
+    - Membre_activity : OneToMany
+    - User : OneToMany
+    - Youth_info : OneToMany
+    - Adult_info : OneToMany
+
+# Data sample
+id
+last_name
+first_name
+birthdate
+address
+contact
+religion
+birth_place
+church
+talent
+picture
+entry_date
+promise_date
+deleted_at
+1
+RANDRIAMAMBOLA
+
+Soatoavina Koloina Ornella
+
+10/06/2001
+Ampitatafika 372 AB Avaratetezana
+
+0341653890
+Protestant
+HOMI Soavinandriana
+
+FJKM Anosizato Andrefana
+Mahay mahandro sakafo be
+picture.jpg
+07/02/2010
+19/05/2013
+null - 12/12/2024
+
+Member_activity: to store the role of a member in a specific year of activity with his stage and section
+Scout technical terms->Fikatrohana: iza mikatroka aiza ? inona ny andraikitra ? …
+# Constraints
+
+- **Database**
+    - category_id : fk references category(id)
+    - member_id : fk references member(id)
+    - activity_year_id : fk references activity_year(id)
+    - stage_id : fk references stage(id)
+    - role_id : fk references role(id)
+- **Code**
+    - category_id : many to one Category
+    - member_id : many to one Member
+    - activity_year_id : many to one Activity_year
+    - stage_id : many to one Stage
+    - role_id : many to one Role
+
+# Data sample
+id
+person_id
+stage_id
+activity_year_id
+member_role_id
+category_id
+note_role
+level
+deleted_at
+1
+1
+1
+1
+1
+1
+Mpiandraikitra fivondronana
+1
+null
+2
+2
+1
+1
+2
+2
+Tonia
+2
+null
+
+Member_card: to store all member cards given after validated payments
+# Constraints
+
+- **Database**
+    - payment_detail_id: fk references payment_detail(id)
+- **Code**
+    - payment_detail_id: many to one Payment_detail
+
+# Data sample
+id
+payment_detail_id
+note
+deleted_at
+1
+1
+null
+2
+2
+null
+
+Member_group_section: to store every member of a group
+# Constraints
+
+- **Database**
+    - group_section_id: fk references Group_section(id)
+    - member_activity_id: fk references member_activity(id)
+- **Code**
+    - group_section_id: many to one Group_section
+    - member_activity_id: many to one Member_activity
+
+# Data sample
+id
+group_section_id
+member_activity_id
+deleted_at
+1
+1
+1
+null
+1
+1
+2
+12-03-2023
+
+Member_role: to store the different types of roles for the Scout members
+Scout technical terms -> Sokajin’andraikitra: beazina, mpitantana, mpanabe
+# Constraints
+
+- **Code**
+    - Member_activity : one to many
+    - Membership_fee: one to many
+
+# Data sample
+id
+name
+note
+deleted_at
+level
+1
+Beazina
+null
+3
+2
+Mpanabe
+null
+2
+3
+Mpitantana
+null
+1
+
+Member_sacrement: to store all details about members’ sacrement
+# Constraints
+
+- **Database**
+    - 
+- **Code**
+    - 
+
+# Data sample
+id
+sacrament_id
+member_id
+date
+place
+deleted_at
+1
+1
+1
+09/08/2010
+EKAR Saint Vincent de Paul Ambatonilita
+null
+1
+2
+1
+23/07/2011
+EKAR Saint Vincent de Paul Ambatonilita
+12-12-2022
+
+Member_transfer_request: to store all transfer requests
+# Constraints
+
+- **Database**
+    - section_id: fk references section(id)
+    - member_id: fk references member(id)
+    - activity_year_id: fk references activity_year(id)
+    - activity_field_id: fk references activity_field(id)
+    - member_role_id: fk references member_role(id)
+- **Code**
+    - section_id: many to one section
+    - member_id: many to one member
+    - activity_year_id: many to one activity_year
+    - activity_field_id: many to one activity_field
+    - member_role_id: many to one member_role
+
+# Data sample
+id
+member_id
+section_id
+activity_year_id
+activity_field_id
+member_role_id
+level
+status
+note
+1
+1
+1
+2
+3
+1
+1
+0
+null
+2
+1
+null
+1
+2
+1
+null
+1
+null
+
+Membership_fee: to store the membership fee for each role in each hierarchy every activity year and for every type of fee
+Scout technical terms-> Vatom-panorenana
+# Constraints
+
+- **Database**
+    - hierarchy_id: fk references hierarchy(id)
+    - role_id: fk references role(id)
+    - activity_year_id: fk references activity_year(id)
+    - fee_type_id: fk references fee_type(id)
+- **Code**
+    - hierarchy_id: many to one hierarchy
+    - role_id: many to one role
+    - activity_year_id: many to one activity_year
+    - fee_type_id: many to one fee_type
+
+Payment: to store every fee payment validate
+# Constraints
+
+- **Database**
+    - payment_draft_id: fk references payment_draft(id)
+- **Code**
+    - payment_draft_id: many to one Payment type
+Data Sample 
+id
+payment_type_id
+note
+date
+payment_draft_id
+deleted_at
+1
+1
+09/10/2022
+1
+null
+2
+2
+09/10/2022
+2
+null
+
+Payment_detail: to store all payment detail validate related to a member
+# Constraints
+
+- **Database**
+    - payment_id: fk references payment(id)
+    - member: fk references member(id)
+    - payment_draft_detail_id: fk references payment_draft_detail(id)
+- **Code**
+    - payment_id: many to one Payment
+    - member_id: many to one Member
+    - payment_draft_detail_id: many to one Payment_draft_detail
+
+# Data sample
+id
+payment_id
+member_id
+payment_draft_detail_id
+deleted_at 
+1
+1
+1
+1
+null 
+2
+1
+1
+2
+null
+
+Payment_draft: to store every fee payment whether in group or individual payment
+# Constraints
+
+- **Database**
+    - payment_type_id: fk references payment_type(id)
+- **Code**
+    - payment_type_id: many to one Payment type
+id
+payment_type_id
+note
+payer
+date
+amount
+deleted_at
+1
+1
+Rakoto Jean
+09/10/2022
+10000
+null
+2
+2
+Rabe Paul
+09/10/2022
+100000
+null
+
+payment_draft_detail: to store all payment detail related to a fee type and a activity year
+# Constraints
+
+- **Database**
+    - payment_draft_id: fk references payment_draft(id)
+    - member__id: fk references member(id)
+    - fee_type_id: fk references fee_type(id)
+    - member_role_id:  fk references Member_role(id)
+    - activity_year_id:fk references Activity_year(id)
+    - hierarchy_id: fk references Hierarchy(id)
+- **Code**
+    - payment_draft_id: many to one Payment_draft
+    - member__id: many to one Member
+    - fee_type_id: many to one Fee_type
+    - member_role_id: many to one Member_role
+    - activity_year_id: many to one Activity_year
+    - hierarchy_id: many to one Hierarchy
+id
+payment_draft_id
+last_name
+first_name
+phone_number
+email
+member_role_id
+activity_year_id
+hierarchy_id
+member_id
+fee_type_id
+amount
+deleted_at 
+1
+1
+RANDRIA
+Soa
+0385678245
+soa@gmail.com
+4
+1
+1
+1
+1
+25000
+null 
+2
+2
+RAKOTO
+Koloina
+0324567821
+koloina@gmail.com
+1
+1
+1
+null
+2
+10000
+null
+
+payment_draft_detail_activity_field: to store all activity fields for a payment draft detail
+# Constraints
+
+- **Database**
+    - payment_draft_id: fk references payment_draft(id)
+    - activity_fieldt_id: fk references activity_field(id)
+- **Code**
+    - payment_draft_id: many to one Payment type
+    - activity_fieldt_id: many to one Activity_field
+
+# Data sample
+| id | activity_field_id | date | payment_draft_id | deleted_at |
+| --- | --- | --- | --- | --- |
+| 1 | 1 | 09/10/2022 | 1 | null |
+| 2 | 2 | 09/10/2022 | 2 | null |
+
+Payment_type: to store all the possibilities of payment type for the membership fee payment
+# Constraints
+
+- **Code**
+    - Payment : one to many
+# Constraints
+d
+name
+note
+deleted_at
+1
+Espèce
+null
+2
+Chèque
+null
+3
+MVola
+null
+4
+Orange Money
+null
+
+Process_type: to store every different types of processes in a scout activity
+# Constraints
+
+- **Code**
+    - Activity_process : One to Many
+id
+name
+note
+deleted_at
+1
+Mialoha
+null
+2
+Mandritra
+null
+3
+Aoriana
+null
+
+Project: to store general informations about a project
+Vadibainga
+# Constraints
+
+- **Code**
+    - project_target_id: one to many project_target
+- Database
+    - project_target_id: foreign key references project_target
+id
+title
+summary
+target_name
+responsible_name
+responsible_contact
+responsible_mail
+project_target_id
+context
+problematics
+group_profit
+others_profit
+direct_benefactor
+scout_benefactor
+non_scout_benefactor
+durability_plan
+total_finances
+start_date
+end_date
+responsible_number
+participants_number
+other_participants_number
+1
+Fanadiovana tanana
+Manadio ny fokotanin’Ampatsakana ho fitandrovana ny fahadiovana eo amin’ny tanana
+Fokotanin’Ampatsakana
+Rakoto Jean Pascal
+0341234567
+jeanpascal@gmail.com
+1
+Miparitaka ny fako eny amin’ny tanana ka mitarika ny lakandrano ho tsentsina ka mampiakatra ny rano
+ Ny fiparitahan’ny fako, ny fahatsentsema’ny lakandrano
+Fahaizana manadio, fahadiovana
+Tanana madio, lakandrano madio
+100
+7
+93
+Asiana fanarim-pako eny amin’ny manodidina
+100000
+15/08/2022
+16/08/2022
+3
+15
+6
+
+Project_activity: to store every activity for a project
+Lahasa
+# Constraints
+
+- **Code**
+    - ex
+- Database
+    - ex
+id
+projet_id
+name
+detail
+1
+1
+Mamafa ny fako
+2
+1
+Manary ny fako
+
+Project_goal: to store the main goals of a project
+VHT an’ny vadibainga
+# Constraints
+
+- **Code**
+    - project_id: one to many project_goal
+- Database
+    - project_id: foreign key references project
+id
+name
+project_id
+1
+Fahadiovan’ny tanana
+1
+2
+Fandehanan’ny rano
+2
+
+Project_manager: to store every manager of a project
+id
+project_id
+name
+role
+activity
+member_id
+1
+1
+Rakoto Jean
+FISA
+Mpandamina ny asa
+1
+2
+2
+Rasoa Alien
+Mpanabe
+Mpitarika
+2
+
+Project_partner: to store every collaborators for the project
+Mpiara-miombon’antoka
+# Constraints
+
+- **Code**
+    - project_id: one to many project_goal
+- Database
+    - project_id: foreign key references project
+    - ex
+
+# Data sample
+id
+name
+partnership_purpose
+project_id
+1
+Mpivarotra kofafa
+Manome kofafa hanampiana ny mpiandalana
+1
+
+Project_result: to store the expected results for a project
+Vokatra andrasana
+# Constraints
+
+- **Code**
+    - project_id: one to many project_goal
+- Database
+    - project_id: foreign key references project
+    - ex
+id
+name
+project_id
+1
+Madio ny tanana
+1
+2
+Madio ny lakandrano
+2
+
+Project_target: to store the general target of each project
+id
+name
+other
+1
+Fokontany
+false
+2
+Region
+true
+
+Project_tool: to store every tools used for the project
+# Constraints
+
+- **Code**
+    - project_activity_id: one to many project_tool
+- Database
+    - project_activity_id: foreign key references project_activity
+
+# Data sample
+id
+project_activity_id
+name
+amount
+1
+1
+Kofafa
+40000
+2
+1
+Gony
+20000
+
+Sacrement: to store all existent sacrement
+id
+name
+note
+deleted_at
+1
+Batemy
+null
+2
+Fampihavanana
+null
+
+Section: to store every youth section
+# Constraints
+
+- **Code**
+    - Step: one to many
+    - Member_activity: one to many
+id
+name
+code
+color
+min_age
+max_age
+section_name
+group_name
+outfit_color
+activity_name
+motto
+engagement
+patron_saint
+council
+base
+deleted_at
+1
+Lovitao
+LVT
+Mavo
+6
+10
+Andia
+Enina
+Bleu ciel
+Bleu marine
+Haza
+Izay tratry ny aina no atao
+Fanomezan-toky
+St Francois d’Assise
+vato fihaonana
+null
+2
+Mpianjoria
+MPJ
+Manga
+11
+15
+Antoko
+Sokajy
+Kaki
+Kaki
+Anjoria
+Antili MPJ na mora na mafy ny dia vonona fo MPJ
+Fanekena
+St Georges Don Bosco
+Tafasiry
+null
+3
+Mpamakilay
+MPK
+Maitso
+16
+18
+Rodona
+Tarika
+Kaki
+Bleu marine
+
+Vakilay
+Dinan’ny MPK vonona mandrakizay
+Famehezan-tena
+St Jean-Baptiste
+Donkafo
+null
+4
+Mpiandalana
+MPD
+Mena
+18
+25
+Fileovana
+Fokonolona
+Kaki
+Marron
+Vady bainga
+Andry iankinana vonona tsara MPD mifampizara
+Velirano
+Mpaminany Moizy
+Dinika
+null
+
+Section_steps: to store every step of each section
+Dingana
+# Constraints
+
+- **Constraint database**
+    - category_id: fk references category(id)
+- **Constraint code**
+    - category_id : Many to one
+
+# Data sample
+id
+section_id
+level
+name
+deledet_at
+1
+1  (LVT)
+1
+Miana-mandady
+null
+2
+1  (LVT)
+2
+Vaky Maso 1
+null
+3
+1  (LVT)
+3
+Vaky Maso 2
+null
+
+Talent: to store every talents for scout youth
+# Constraints
+
+- **Database**
+    - talent_category_id: fk references Talent_category (id)
+- **Code**
+    - talent_category_id: many to one Talent_category
+
+# Data sample
+id
+talent_category_id
+name
+image
+note
+deleted_at
+1
+1
+Mpitahiry
+mpitahiry.jpg
+…
+null
+2
+1
+Mpandinika
+mpandinika.jpg
+…
+null
+2
+1
+Mpampita hafatra
+mpampita_hafatra.jpg
+…
+null
+4
+1
+Mpanao hatsikana
+hatsikana.jpg
+…
+null
+
+Talent_category: to store every talent category for scout youth
+# Constraints
+
+- **Code**
+    - id: one to many (talent)
+
+# Data sample
+id
+name
+color
+deleted_at
+1
+Loko Manga
+Manga
+null
+2
+Loko Mena
+Mena
+null
+3
+Loko Mavo
+Mavo
+null
+4
+Loko Maintso
+Maintso
+null
+5
+Loko Fotsy
+Fotsy
+null
+
+Talent_goal: to store every goal related to a talent for each section
+# Constraints
+
+- **Database**
+    - talent_id: fk references Talent(id)
+    - section_id: fk references Section(id)
+- **Code**
+    - talent_id: many to one Talent
+    - section_id: many to one Section
+Data sample
+| id | talent_id | section_id | talent_goal | deleted_at |
+| --- | --- | --- | --- | --- |
+| 1 | 1 | 1 | Hajia | null |
+| 2 | 2 | 1 | Zava-maniry | null |
+
+User: to store connection information of every members
+# Constraints
+
+- **Constraint database**
+    - member_id: fk references member(id)
+- **Constraint code**
+    - member_id: many to one Member
+
+# Data sample
+id
+username
+password
+deleted_at
+1
+hery.tahiana
+password1234
+null -  22/05/2023
+
+Youth_info: to store special informations about youths
+Tondro beazina
+# Constraints
+
+- **Database**
+    - member_id: fk references member(id)
+- **Code**
+    - member_id: many to one Member
+
+# Data sample
+# Youth_info
+
+# Constraints
+
+- **Database**
+    - member_id: fk references member(id)
+- **Code**
+    - member_id: many to one Member
+
+# Data sample
+
+| id | father_name | father_contact | father_mail | mother_name | mother_contact | mother_mail | person_id | school_name | level | note | siblings | siblings_rank | lvt_entry_date | mpj_entry_date | mpd_entry_date | mpk_entry_date | hobby | language | health_condition | allergy | deleted_at |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | RAKOTO Jean | 0341234567 | jean@gmail.com | RAVAO Marie | 0322345678 | marie@gmail.com | 1 | Saint Michel Amparibe | CM2 |  | 3 | 1 | 08/06/2009 | 23/03/2010 | 16/05/2011 | 06/04/2012 | Jeux videos, Football | Malagasy, Francais, Anglais | Diabetique | Fruit de mer | null -
+12/12/20023 |
+|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+
