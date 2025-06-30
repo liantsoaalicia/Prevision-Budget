@@ -12,7 +12,7 @@
         <thead>
             <tr>
                 <th>ID Ticket</th>
-                <th>Titre</th>
+                <th>Discussion</th>
                 <th>Description</th>
                 <th>Date Création</th>
                 <th>Statut Actuel</th>
@@ -28,7 +28,12 @@
                 <?php foreach ($tickets as $ticket): ?>
                     <tr>
                         <td><?= $ticket['idTicket'] ?></td>
-                        <td><?= htmlspecialchars($ticket['titre'] ?? 'N/A') ?></td>
+                        <td>
+                            <button onclick="window.location.href='ticket/discussion-ticket.php?idTicket=<?= $ticket['idTicket'] ?>&idAgent=<?= $ticket['idAgent'] ?>&idClient=<?= $ticket['idClient'] ?>'" 
+                                    style="background-color:rgb(122, 167, 216); color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">
+                                💬 Discussion
+                            </button>
+                        </td>
                         <td><?= htmlspecialchars(substr($ticket['description'] ?? '', 0, 100)) ?><?= strlen($ticket['description'] ?? '') > 100 ? '...' : '' ?></td>
                         <td><?= isset($ticket['dateCreation']) ? date('d/m/Y H:i', strtotime($ticket['dateCreation'])) : 'N/A' ?></td>
                         <td>

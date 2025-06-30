@@ -210,6 +210,19 @@ CREATE TABLE evaluation_ticket (
     FOREIGN KEY (idTicket) REFERENCES tickets(idTicket)
 );
 
+CREATE TABLE discussion (
+    idDiscussion INT AUTO_INCREMENT PRIMARY KEY,
+    sujet VARCHAR(255),
+    dateCreation DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+ALTER TABLE discussion
+ADD COLUMN idAgent INT NULL,
+ADD COLUMN idClient INT NULL,
+ADD COLUMN idTicket INT NULL,
+ADD FOREIGN KEY (idAgent) REFERENCES agents(idAgent),
+ADD FOREIGN KEY (idClient) REFERENCES clients(idClient),
+ADD FOREIGN KEY (idTicket) REFERENCES tickets(idTicket);
+
 -- Table des messages dans une discussion
 CREATE TABLE discussion_ticket (
     idMessage INT AUTO_INCREMENT PRIMARY KEY,
@@ -224,3 +237,13 @@ CREATE TABLE discussion_ticket (
     FOREIGN KEY (idClient) REFERENCES clients(idClient),
     FOREIGN KEY (idAgent) REFERENCES agents(idAgent)
 );
+
+ALTER TABLE discussion_ticket
+ADD COLUMN idDiscussion INT,
+ADD FOREIGN KEY (idDiscussion) REFERENCES discussion(idDiscussion);
+
+ALTER TABLE discussion_ticket
+DROP FOREIGN KEY discussion_ticket_ibfk_1;
+
+ALTER TABLE discussion_ticket
+DROP COLUMN idTicket;
