@@ -224,3 +224,7 @@ CREATE TABLE discussion_ticket (
     FOREIGN KEY (idClient) REFERENCES clients(idClient),
     FOREIGN KEY (idAgent) REFERENCES agents(idAgent)
 );
+
+-- A AJOUTER !!!
+ALTER TABLE agents ADD COLUMN idDepartement INT;
+ALTER TABLE agents ADD CONSTRAINT fk_agents_departement FOREIGN KEY (idDepartement) REFERENCES departement(idDepartement);

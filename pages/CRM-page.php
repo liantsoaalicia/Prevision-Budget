@@ -181,6 +181,8 @@
                     <a href="CRM-page.php?page=ticket/statut-ticket">Status Ticket</a>
                     <a href="CRM-page.php?page=ticket/creation-ticket">Creation ticket</a>
                     <a href="CRM-page.php?page=ticket/assignation-ticket">Assignation d'un ticket</a>
+                    <a href="CRM-page.php?page=ticket/filtre-ticket">Filtre des tickets</a>
+                    <a href="CRM-page.php?page=ticket/rapport-performance">Rapport de performance</a>
                 </div>
             </li>
             
