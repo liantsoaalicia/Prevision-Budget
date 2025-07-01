@@ -1,6 +1,11 @@
 <?php
 require_once('../inc/fonctionTicket.php');
-$tickets = getResolvedTickets();
+
+$hasFeedback = $_GET['hasFeedback'] ?? null; // 'oui', 'non', ou null
+$dateDebut = $_GET['dateDebut'] ?? null;    // format YYYY-MM-DD ou null
+$dateFin = $_GET['dateFin'] ?? null;
+
+$tickets = getResolvedTickets($hasFeedback, $dateDebut, $dateFin);
 ?>
 
 <!DOCTYPE html>
@@ -30,10 +35,23 @@ $tickets = getResolvedTickets();
             border-bottom: 2px solid #573d34;
             padding-bottom: 10px;
         }
+        form {
+            margin-bottom: 20px;
+        }
+        form label {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        form select, form input[type="date"] {
+            padding: 5px;
+            margin-right: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 10px;
         }
         th, td {
             padding: 12px 15px;
@@ -61,7 +79,7 @@ $tickets = getResolvedTickets();
             background-color: #573d34;
         }
         .btn-primary:hover {
-            background-color: #573d34;
+            background-color: #6f4c3a;
         }
         .btn-success {
             background-color: #28a745;
@@ -74,6 +92,25 @@ $tickets = getResolvedTickets();
 <body>
     <div class="container">
         <h1>Tickets Résolus</h1>
+
+        <form method="GET" action="CRM-page.php">
+            <input type="hidden" name="page" value="ticket/tickets-resolus">
+            <label for="hasFeedback">Feedback :</label>
+            <select name="hasFeedback" id="hasFeedback">
+                <option value="" <?= ($hasFeedback === null || $hasFeedback === '') ? 'selected' : '' ?>>Tous</option>
+                <option value="oui" <?= ($hasFeedback === 'oui') ? 'selected' : '' ?>>Avec feedback</option>
+                <option value="non" <?= ($hasFeedback === 'non') ? 'selected' : '' ?>>Sans feedback</option>
+            </select>
+
+            <label for="dateDebut">Date début :</label>
+            <input type="date" id="dateDebut" name="dateDebut" value="<?= htmlspecialchars($dateDebut) ?>">
+
+            <label for="dateFin">Date fin :</label>
+            <input type="date" id="dateFin" name="dateFin" value="<?= htmlspecialchars($dateFin) ?>">
+
+            <button type="submit" class="btn btn-primary">Filtrer</button>
+        </form>
+
         <table>
             <thead>
                 <tr>
@@ -85,25 +122,31 @@ $tickets = getResolvedTickets();
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($tickets as $ticket): ?>
-                <tr>
-                    <td><?= $ticket['idTicket'] ?></td>
-                    <td><?= htmlspecialchars($ticket['prenom'] . ' ' . $ticket['nom']) ?></td>
-                    <td><?= htmlspecialchars($ticket['sujet']) ?></td>
-                    <td><?= date('d/m/Y H:i', strtotime($ticket['dateCreation'])) ?></td>
-                    <td>
-                        <?php if ($ticket['hasFeedback']): ?>
-                            <a href="CRM-page.php?page=ticket/voir-retour&idTicket=<?= $ticket['idTicket'] ?>" class="btn btn-success">
-                                Voir retour
-                            </a>
-                        <?php else: ?>
-                            <a href="CRM-page.php?page=ticket/ajout-retour-client&idTicket=<?= $ticket['idTicket'] ?>" class="btn btn-primary">
-                                Ajouter retour client
-                            </a>
-                        <?php endif; ?>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
+                <?php if (count($tickets) === 0): ?>
+                    <tr>
+                        <td colspan="5" style="text-align:center;">Aucun ticket trouvé pour ces filtres.</td>
+                    </tr>
+                <?php else: ?>
+                    <?php foreach ($tickets as $ticket): ?>
+                    <tr>
+                        <td><?= $ticket['idTicket'] ?></td>
+                        <td><?= htmlspecialchars($ticket['prenom'] . ' ' . $ticket['nom']) ?></td>
+                        <td><?= htmlspecialchars($ticket['sujet']) ?></td>
+                        <td><?= date('d/m/Y H:i', strtotime($ticket['dateCreation'])) ?></td>
+                        <td>
+                            <?php if ($ticket['hasFeedback'] > 0): ?>
+                                <a href="CRM-page.php?page=ticket/voir-retour&idTicket=<?= $ticket['idTicket'] ?>" class="btn btn-success">
+                                    Voir retour
+                                </a>
+                            <?php else: ?>
+                                <a href="CRM-page.php?page=ticket/ajout-retour-client&idTicket=<?= $ticket['idTicket'] ?>" class="btn btn-primary">
+                                    Ajouter retour client
+                                </a>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>

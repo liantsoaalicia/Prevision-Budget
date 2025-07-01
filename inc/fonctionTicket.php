@@ -147,17 +147,43 @@
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    function getResolvedTickets() {
+    function getResolvedTickets($hasFeedback = null, $dateDebut = null, $dateFin = null) {
         $con = dbConnect();
-        $query = "SELECT t.*, c.prenom, c.nom, c.email, 
+
+        // Base de la requête
+        $query = "SELECT t.*, c.prenom, c.nom, 
                 (SELECT COUNT(*) FROM evaluation_ticket et WHERE et.idTicket = t.idTicket) as hasFeedback
                 FROM tickets t
                 JOIN clients c ON t.idClient = c.idClient
-                WHERE t.idStatus = 4"; // Statut 4 = Résolu
+                WHERE t.idStatus = 4"; // Résolu
+
+        $params = [];
+
+        // Filtre sur feedback
+        if ($hasFeedback === 'oui') {
+            $query .= " AND (SELECT COUNT(*) FROM evaluation_ticket et WHERE et.idTicket = t.idTicket) > 0";
+        } elseif ($hasFeedback === 'non') {
+            $query .= " AND (SELECT COUNT(*) FROM evaluation_ticket et WHERE et.idTicket = t.idTicket) = 0";
+        }
+
+        // Filtre sur date début
+        if (!empty($dateDebut)) {
+            $query .= " AND t.dateCreation >= :dateDebut";
+            $params[':dateDebut'] = $dateDebut . " 00:00:00";
+        }
+
+        // Filtre sur date fin
+        if (!empty($dateFin)) {
+            $query .= " AND t.dateCreation <= :dateFin";
+            $params[':dateFin'] = $dateFin . " 23:59:59";
+        }
+
         $stmt = $con->prepare($query);
-        $stmt->execute();
+        $stmt->execute($params);
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 
     function getClientByTicket($idTicket) {
         $con = dbConnect();
