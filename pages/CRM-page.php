@@ -21,6 +21,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion Budgétaire</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/style.css">
     <style>
         body {
@@ -28,92 +31,28 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
+            font-family: 'Montserrat', 'Quicksand', Arial, sans-serif;
+            background: var(--background-light);
         }
-        
-        .sidebar {
-            width: 250px;
-            background-color: #8D6E63;
-            color: white;
-            height: 100vh;
-            position: fixed;
-            overflow-y: auto;
-        }
-        
-        .sidebar-header {
-            padding: 20px;
-            background-color: #573d34;
-            text-align: center;
-        }
-        
-        .sidebar-menu {
-            padding: 0;
-            list-style: none;
-        }
-        
-        .sidebar-menu li {
-            border-bottom: 1px solid #8D6E63;
-        }
-        
-        .sidebar-menu a {
-            display: block;
-            padding: 15px 20px;
-            color: #ecf0f1;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .sidebar-menu a:hover {
-            background-color: #D7CCC8;
-            padding-left: 25px;
-            color: #333;
-        }
-        
-        .dropdown-btn {
-            width: 100%;
-            text-align: left;
-            background: none;
-            border: none;
-            color: white;
-            padding: 15px 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .dropdown-btn:hover {
-            background-color: #A1887F;
-            padding-left: 25px;
-        }
-        
-        .dropdown-container {
-            display: none;
-            background-color: #A1887F;
-            padding-left: 20px;
-        }
-        
-        .active {
-            background-color: #6D4C41;
-        }
-        
         .main-content {
             margin-left: 250px;
-            padding: 20px;
+            padding: 24px 32px;
             width: calc(100% - 250px);
+            background: var(--background-light);
+            font-family: 'Quicksand', Arial, sans-serif;
         }
-        
-        .dept-info {
-            padding: 15px;
-            background-color: #8D6E63;
-            text-align: center;
-            font-weight: bold;
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            letter-spacing: 1px;
         }
-        
-        .point-vert {
-            height: 10px;
-            width: 10px;
-            background-color: #2ecc71;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 10px;
+        .sidebar-header h3 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+        }
+        .sidebar-menu a, .dropdown-btn {
+            font-family: 'Quicksand', Arial, sans-serif;
+            font-size: 1.08rem;
         }
     </style>
 </head>
