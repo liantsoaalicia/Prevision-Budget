@@ -3,7 +3,9 @@
 
     function getAllTickets() {
         $con = dbConnect();
-        $query = "SELECT * FROM tickets";
+        $query = "SELECT t.*, COALESCE(at.idAgent, 0) AS idAgent
+              FROM tickets t
+              LEFT JOIN agent_ticket at ON t.idTicket = at.idTicket";
         $stmt = $con->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -77,6 +79,8 @@
         return $result;
     }
 
+    
+   
     function insertTicket($idClient, $sujet, $description, $priorite, $fichier) {
         $con = dbConnect();
         $query = "INSERT INTO tickets (idClient, idStatus, sujet, description, priorite, fichier) 
