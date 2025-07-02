@@ -92,7 +92,15 @@
         $stmt->bindParam(':priorite', $priorite);
         $stmt->bindParam(':fichier', $fichier);
 
+        $comm = "creation ticket";
         if ($stmt->execute()) {
+            $idTicket = $con->lastInsertId();
+            $queryPriority = "INSERT INTO ticket_priority_history (idTicket, nouvellePriorite, commentaire) VALUES (:idTicket, :priorite, :commentaire)";
+            $stmtPriority = $con->prepare($queryPriority);
+            $stmtPriority->bindParam(':idTicket', $idTicket);
+            $stmtPriority->bindParam(':priorite', $priorite);
+            $stmtPriority->bindParam(':commentaire', $comm);
+            $stmtPriority->execute();
             return $con->lastInsertId(); 
         } else {
             return false;
