@@ -39,6 +39,19 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <section id="filtre-ticket">
     <h2>Filtrer les tickets</h2>
+    
+    <?php if (isset($_GET['success'])): ?>
+        <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #c3e6cb;">
+            <?= htmlspecialchars($_GET['success']) ?>
+        </div>
+    <?php endif; ?>
+    
+    <?php if (isset($_GET['erreur'])): ?>
+        <div style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #f5c6cb;">
+            <?= htmlspecialchars($_GET['erreur']) ?>
+        </div>
+    <?php endif; ?>
+    
     <form method="get" action="CRM-page.php" style="margin-bottom: 20px; display: flex; gap: 20px; align-items: flex-end;">
         <input type="hidden" name="page" value="ticket/filtre-ticket">
         <div>
@@ -85,11 +98,12 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <th>Statut</th>
                 <th>Priorité</th>
                 <th>Date création</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             <?php if (empty($tickets)): ?>
-                <tr><td colspan="7" style="text-align:center;">Aucun ticket trouvé</td></tr>
+                <tr><td colspan="8" style="text-align:center;">Aucun ticket trouvé</td></tr>
             <?php else: ?>
                 <?php foreach ($tickets as $t): ?>
                     <tr>
@@ -112,6 +126,19 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </td>
                         <td><?= htmlspecialchars(ucfirst($t['priorite'] ?? '')) ?></td>
                         <td><?= isset($t['dateCreation']) ? date('d/m/Y H:i', strtotime($t['dateCreation'])) : 'N/A' ?></td>
+                        <td>
+                            <form action="ticket/traitement-modifier-priorite.php" method="POST" style="display: inline-flex; align-items: center; gap: 5px;">
+                                <input type="hidden" name="idTicket" value="<?= $t['idTicket'] ?>">
+                                <select name="nouvellePriorite" required style="padding: 4px; font-size: 12px;">
+                                    <option value="basse" <?= ($t['priorite'] == 'basse') ? 'selected' : '' ?>>Basse</option>
+                                    <option value="normale" <?= ($t['priorite'] == 'normale') ? 'selected' : '' ?>>Normale</option>
+                                    <option value="haute" <?= ($t['priorite'] == 'haute') ? 'selected' : '' ?>>Haute</option>
+                                </select>
+                                <button type="submit" style="padding: 4px 8px; font-size: 12px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">
+                                    Modifier
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             <?php endif; ?>

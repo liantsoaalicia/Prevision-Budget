@@ -84,15 +84,30 @@
     function insertTicket($idClient, $sujet, $description, $priorite, $fichier) {
         $con = dbConnect();
         $query = "INSERT INTO tickets (idClient, idStatus, sujet, description, priorite, fichier) 
-                    VALUES (:idClient, 1, :sujet, :description, :priorite, :fichier)";
+                VALUES (:idClient, 1, :sujet, :description, :priorite, :fichier)";
         $stmt = $con->prepare($query);
         $stmt->bindParam(':idClient', $idClient);
         $stmt->bindParam(':sujet', $sujet);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':priorite', $priorite);
         $stmt->bindParam(':fichier', $fichier);
+
+        if ($stmt->execute()) {
+            return $con->lastInsertId(); 
+        } else {
+            return false;
+        }
+    }
+
+    function insertBudgetTicket($idTicket, $budgetPrevisionnel) {
+        $con = dbConnect();
+        $query = "INSERT INTO budget_ticket (idTicket, budgetPrevisionnel) VALUES (:idTicket, :budget)";
+        $stmt = $con->prepare($query);
+        $stmt->bindParam(':idTicket', $idTicket);
+        $stmt->bindParam(':budget', $budgetPrevisionnel);
         return $stmt->execute();
     }
+
 
     function uploadFichier($inputName) {
         if (!isset($_FILES[$inputName]) || $_FILES[$inputName]['error'] !== UPLOAD_ERR_OK) {

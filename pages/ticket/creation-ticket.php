@@ -38,6 +38,10 @@
                 <?php } ?>
             </select>
         </div>
+        <div>
+            <label for="budget">Budget prévisionnel :</label>
+            <input type="number" step="1" id="budget" name="budget_previsionnel" required>
+        </div>
 
         <button type="submit">Creer</button>
     </form>

@@ -85,3 +85,6 @@ INSERT INTO agent_ticket (idAgent, idTicket) VALUES
 (1, 4), -- Alice gère aussi le ticket 4
 (2, 5); -- Bob gère le ticket 5
 
+SELECT idMessage, auteur, message, dateMessage FROM discussion_ticket 
+WHERE idDiscussion = 4
+ORDER BY dateMessage ASC;
