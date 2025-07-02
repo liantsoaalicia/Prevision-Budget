@@ -5,11 +5,12 @@
         $con = dbConnect();
         $query = "SELECT t.*, COALESCE(at.idAgent, 0) AS idAgent
               FROM tickets t
-              LEFT JOIN agent_ticket at ON t.idTicket = at.idTicket";
+              LEFT JOIN agent_ticket at ON t.idTicket = at.idTicket
+              INNER JOIN budget_ticket bt ON t.idTicket = bt.idTicket
+              WHERE bt.valideFinance = 1";
         $stmt = $con->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         return $result;
     }
     

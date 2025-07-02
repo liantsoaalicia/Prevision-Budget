@@ -1,7 +1,7 @@
 <?php
     
     closeOldEnCoursTickets();
-    $tickets = getAllTickets();     
+    $tickets = getAllTickets(); // Déjà filtré pour tickets validés
     $allStatus = getAllStatusTicket();
 ?>
 

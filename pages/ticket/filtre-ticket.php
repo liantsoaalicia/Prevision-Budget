@@ -27,11 +27,12 @@ if ($filtre_priorite !== '') {
     $where[] = 'priorite = :priorite';
     $params[':priorite'] = $filtre_priorite;
 }
-$sql = 'SELECT * FROM tickets';
+
+$sql = 'SELECT t.* FROM tickets t INNER JOIN budget_ticket bt ON t.idTicket = bt.idTicket WHERE bt.valideFinance = 1';
 if (count($where) > 0) {
-    $sql .= ' WHERE ' . implode(' AND ', $where);
+    $sql .= ' AND ' . implode(' AND ', $where);
 }
-$sql .= ' ORDER BY idTicket DESC';
+$sql .= ' ORDER BY t.idTicket DESC';
 $stmt = $con->prepare($sql);
 $stmt->execute($params);
 $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);

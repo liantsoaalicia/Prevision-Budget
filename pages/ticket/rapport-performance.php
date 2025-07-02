@@ -5,17 +5,23 @@ include_once __DIR__ . '/../../inc/connection.php';
 $con = dbConnect();
 
 // Tickets ouverts par semaine (création)
-$sql_ouverts = "SELECT YEAR(dateCreation) as annee, WEEK(dateCreation, 1) as semaine, COUNT(*) as nb_ouverts
-FROM tickets
+
+// Tickets ouverts par semaine (création) - uniquement tickets validés
+$sql_ouverts = "SELECT YEAR(t.dateCreation) as annee, WEEK(t.dateCreation, 1) as semaine, COUNT(*) as nb_ouverts
+FROM tickets t
+INNER JOIN budget_ticket bt ON t.idTicket = bt.idTicket
+WHERE bt.valideFinance = 1
 GROUP BY annee, semaine
 ORDER BY annee DESC, semaine DESC
 LIMIT 10";
 $ouverts = $con->query($sql_ouverts)->fetchAll(PDO::FETCH_ASSOC);
 
-// Tickets fermés par semaine (statut 5 = fermé)
-$sql_fermes = "SELECT YEAR(dateChangement) as annee, WEEK(dateChangement, 1) as semaine, COUNT(*) as nb_fermes
-FROM ticket_status_history
-WHERE idStatus = 5
+// Tickets fermés par semaine (statut 5 = fermé) - uniquement tickets validés
+$sql_fermes = "SELECT YEAR(th.dateChangement) as annee, WEEK(th.dateChangement, 1) as semaine, COUNT(*) as nb_fermes
+FROM ticket_status_history th
+INNER JOIN tickets t ON th.idTicket = t.idTicket
+INNER JOIN budget_ticket bt ON t.idTicket = bt.idTicket
+WHERE th.idStatus = 5 AND bt.valideFinance = 1
 GROUP BY annee, semaine
 ORDER BY annee DESC, semaine DESC
 LIMIT 10";

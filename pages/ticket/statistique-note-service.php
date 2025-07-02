@@ -6,11 +6,14 @@ $annee = isset($_GET['annee']) ? (int)$_GET['annee'] : date("Y");
 function getStatsEvaluationTickets($annee) {
     $con = dbConnect();
 
+
     $sql = "
         SELECT note, COUNT(*) AS nombre
         FROM evaluation_ticket e
         JOIN tickets t ON e.idTicket = t.idTicket
+        INNER JOIN budget_ticket bt ON t.idTicket = bt.idTicket
         WHERE YEAR(e.dateEvaluation) = :annee
+        AND bt.valideFinance = 1
         GROUP BY note
         ORDER BY note
     ";

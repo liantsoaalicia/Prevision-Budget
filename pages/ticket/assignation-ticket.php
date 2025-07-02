@@ -1,6 +1,6 @@
 <?php 
     $agents = getAllAgents();
-    $tickets = getAllTickets();
+    $tickets = getAllTickets(); // Déjà filtré pour tickets validés
 ?>
 
 <section id="assignation-ticket">

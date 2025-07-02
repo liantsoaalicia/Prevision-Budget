@@ -1,0 +1,25 @@
+réponse à mettre dans un seul fichier .txt uniquement
+les images à enregistrer dans des png avec les noms indiqués dans les questions
+le format à envoyer est donc un fichier zip contenant un repertoire sous la forme ETU00XXXX_ETU00XXXX_ETU00XXXX 
+(avec les trois numéro du groupe)
+
+Pour les deux premiers types de problèmes:
+1) Imaginer un exemple de données pour lequel les trois algos proposés donnera des résultats différents
+(appuyer avec des print screen de votre application dans d'autres fichiers:
+    - 1D_FF.png
+    - 1D_BF.png
+    - 1D_WF.png
+    - 2D_NFDH.png
+    - 2D_BF.png
+    - 2D_FFDH.png
+)
+2) Ecrire l'algo de brute force
+
+2D Packing avec trois forme avec rotation de pi/2 ou de pi
+1) écrire l'algo heuristique
+2) écrire l'algo brute force
+3) Imaginer deux données pour lesquels les deux algos ci-dessus montrent des différents résultats:
+(image sous le nom:
+2D_ROT_HEURISTIQUE.png
+2D_ROT_BRUTE_FORCE.png
+)
