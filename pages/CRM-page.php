@@ -122,6 +122,8 @@
                     <a href="CRM-page.php?page=ticket/assignation-ticket">Assignation d'un ticket</a>
                     <a href="CRM-page.php?page=ticket/filtre-ticket">Filtre des tickets</a>
                     <a href="CRM-page.php?page=ticket/rapport-performance">Rapport de performance</a>
+                    <a href="CRM-page.php?page=ticket/tickets-resolus"> Liste tickets resolus </a>
+                    <a href="CRM-page.php?page=ticket/statistique-note-service"> Statistique service </a>
                 </div>
             </li>
             
