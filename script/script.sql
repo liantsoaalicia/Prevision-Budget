@@ -251,3 +251,14 @@ DROP FOREIGN KEY discussion_ticket_ibfk_1;
 ALTER TABLE discussion_ticket
 DROP COLUMN idTicket;
 
+
+CREATE TABLE budget_ticket (
+    idBudgetTicket INT AUTO_INCREMENT PRIMARY KEY,
+    idTicket INT NOT NULL,
+    budgetPrevisionnel DECIMAL(10,2) NOT NULL,
+    coutReel DECIMAL(10,2) DEFAULT NULL,
+    valideFinance BOOLEAN DEFAULT FALSE,
+    dateValidation DATETIME DEFAULT NULL,
+    FOREIGN KEY (idTicket) REFERENCES tickets(idTicket)
+);
+
