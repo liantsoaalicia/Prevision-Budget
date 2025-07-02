@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include('../inc/fonctions.php');
+    include_once('../inc/fonctions.php');
     $page = "accueil";
     if(isset($_GET['page'])){
         $page = $_GET['page'];

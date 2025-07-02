@@ -1,5 +1,5 @@
 <?php
-include("../inc/fonctions.php");
+include_once("../inc/fonctions.php");
 
 if(isset($_GET['id'])) {
     try {

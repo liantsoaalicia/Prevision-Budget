@@ -1,6 +1,6 @@
 <?php 
 
-    include('../inc/fonctions.php');
+    include_once('../inc/fonctions.php');
 
     $categorie = $_POST['categorie'];
     $type = $_POST['type'];

@@ -1,6 +1,6 @@
 <?php 
 
-    include('../inc/fonctions.php');
+    include_once('../inc/fonctions.php');
 
     $idDepartement = $_POST['idDepartement'];
     $debut = $_POST['debut'];

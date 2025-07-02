@@ -1,6 +1,6 @@
 <?php
 include('../../inc/fonctionTicket.php');
-include('../../inc/fonctions.php');
+include_once('../../inc/fonctions.php');
     // Handle new discussion creation
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $idTicket = $_GET['idTicket'];
