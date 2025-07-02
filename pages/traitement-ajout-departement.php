@@ -1,6 +1,6 @@
 <?php
 
-    include('../inc/fonctions.php');
+    include_once('../inc/fonctions.php');
     $nom = $_POST['nom'];
     $success = insertDepartement($nom);
     if($success) {

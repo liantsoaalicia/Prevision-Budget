@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include('../inc/fonctions.php');
+    include_once('../inc/fonctions.php');
     include('../inc/fonctionCommande.php');
     include('../inc/fonctionEvenement.php');
     include('../inc/fonctionTicket.php');
@@ -122,6 +122,11 @@
                     <a href="CRM-page.php?page=ticket/assignation-ticket">Assignation d'un ticket</a>
                     <a href="CRM-page.php?page=ticket/filtre-ticket">Filtre des tickets</a>
                     <a href="CRM-page.php?page=ticket/rapport-performance">Rapport de performance</a>
+                    <a href="CRM-page.php?page=ticket/tickets-resolus"> Liste tickets resolus </a>
+                    <a href="CRM-page.php?page=ticket/statistique-note-service"> Statistique service </a>
+                    <?php if($isItFinance) { ?>
+                        <a href="CRM-page.php?page=ticket/validation-ticket">Validation des tickets</a>
+                    <?php } ?>
                 </div>
             </li>
             

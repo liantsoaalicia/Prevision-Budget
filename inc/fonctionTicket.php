@@ -146,4 +146,90 @@
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    function getResolvedTickets($hasFeedback = null, $dateDebut = null, $dateFin = null) {
+        $con = dbConnect();
+
+        // Base de la requête
+        $query = "SELECT t.*, c.prenom, c.nom, 
+                (SELECT COUNT(*) FROM evaluation_ticket et WHERE et.idTicket = t.idTicket) as hasFeedback
+                FROM tickets t
+                JOIN clients c ON t.idClient = c.idClient
+                WHERE t.idStatus = 4"; // Résolu
+
+        $params = [];
+
+        // Filtre sur feedback
+        if ($hasFeedback === 'oui') {
+            $query .= " AND (SELECT COUNT(*) FROM evaluation_ticket et WHERE et.idTicket = t.idTicket) > 0";
+        } elseif ($hasFeedback === 'non') {
+            $query .= " AND (SELECT COUNT(*) FROM evaluation_ticket et WHERE et.idTicket = t.idTicket) = 0";
+        }
+
+        // Filtre sur date début
+        if (!empty($dateDebut)) {
+            $query .= " AND t.dateCreation >= :dateDebut";
+            $params[':dateDebut'] = $dateDebut . " 00:00:00";
+        }
+
+        // Filtre sur date fin
+        if (!empty($dateFin)) {
+            $query .= " AND t.dateCreation <= :dateFin";
+            $params[':dateFin'] = $dateFin . " 23:59:59";
+        }
+
+        $stmt = $con->prepare($query);
+        $stmt->execute($params);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    function getClientByTicket($idTicket) {
+        $con = dbConnect();
+        $query = "SELECT c.* FROM clients c
+                JOIN tickets t ON c.idClient = t.idClient
+                WHERE t.idTicket = :idTicket";
+        $stmt = $con->prepare($query);
+        $stmt->bindParam(':idTicket', $idTicket);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    function addClientFeedback($idTicket, $note, $commentaire) {
+        $con = dbConnect();
+        try {
+            $con->beginTransaction();
+            
+            // Ajouter l'évaluation
+            $query = "INSERT INTO evaluation_ticket (idTicket, note, commentaire) 
+                    VALUES (:idTicket, :note, :commentaire)";
+            $stmt = $con->prepare($query);
+            $stmt->bindParam(':idTicket', $idTicket);
+            $stmt->bindParam(':note', $note);
+            $stmt->bindParam(':commentaire', $commentaire);
+            $stmt->execute();
+            
+            // Marquer que le client a répondu
+            // $query = "UPDATE tickets SET clientHasResponded = TRUE WHERE idTicket = :idTicket";
+            // $stmt = $con->prepare($query);
+            // $stmt->bindParam(':idTicket', $idTicket);
+            // $stmt->execute();
+            
+            $con->commit();
+            return true;
+        } catch (Exception $e) {
+            $con->rollBack();
+            return false;
+        }
+    }
+
+    function getTicketFeedback($idTicket) {
+        $con = dbConnect();
+        $query = "SELECT * FROM evaluation_ticket WHERE idTicket = :idTicket";
+        $stmt = $con->prepare($query);
+        $stmt->bindParam(':idTicket', $idTicket);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 ?>

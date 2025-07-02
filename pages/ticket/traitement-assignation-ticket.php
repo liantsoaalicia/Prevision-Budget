@@ -1,6 +1,6 @@
 <?php 
     require_once '../../inc/fonctionTicket.php';
-    include('../../inc/fonctions.php');
+    include_once('../../inc/fonctions.php');
 
     $idTicket = $_POST['id_ticket'];
     $idAgent = $_POST['id_agent'];

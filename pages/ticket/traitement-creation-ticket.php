@@ -1,6 +1,6 @@
 <?php 
     require_once '../../inc/fonctionTicket.php';
-    include('../../inc/fonctions.php');
+    include_once('../../inc/fonctions.php');
 
     $sujet = $_POST['titre'];
     $description = $_POST['description'];

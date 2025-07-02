@@ -1,7 +1,7 @@
 <?php 
 
     session_start();
-    include('../inc/fonctions.php');
+    include_once('../inc/fonctions.php');
     $nom = $_POST['nom'];
     $mdp = $_POST['mdp'];
 
