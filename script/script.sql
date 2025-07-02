@@ -238,6 +238,7 @@ CREATE TABLE discussion_ticket (
     FOREIGN KEY (idAgent) REFERENCES agents(idAgent)
 );
 
+
 -- A AJOUTER !!!
 ALTER TABLE agents ADD COLUMN idDepartement INT;
 ALTER TABLE agents ADD CONSTRAINT fk_agents_departement FOREIGN KEY (idDepartement) REFERENCES departement(idDepartement);
@@ -250,4 +251,17 @@ DROP FOREIGN KEY discussion_ticket_ibfk_1;
 
 ALTER TABLE discussion_ticket
 DROP COLUMN idTicket;
+
+-- Table pour l'historique des changements de priorité des tickets
+CREATE TABLE ticket_priority_history (
+    idHistoryPriority INT AUTO_INCREMENT PRIMARY KEY,
+    idTicket INT,
+    anciennePriorite ENUM('basse', 'normale', 'haute'),
+    nouvellePriorite ENUM('basse', 'normale', 'haute'),
+    idUser INT,
+    dateChangement DATETIME DEFAULT CURRENT_TIMESTAMP,
+    commentaire TEXT, -- optionnel : raison du changement de priorité
+    FOREIGN KEY (idTicket) REFERENCES tickets(idTicket),
+    FOREIGN KEY (idUser) REFERENCES user(idUser)
+);
 
