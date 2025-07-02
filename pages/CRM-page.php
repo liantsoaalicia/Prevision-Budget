@@ -124,6 +124,7 @@
                     <a href="CRM-page.php?page=ticket/rapport-performance">Rapport de performance</a>
                     <a href="CRM-page.php?page=ticket/tickets-resolus"> Liste tickets resolus </a>
                     <a href="CRM-page.php?page=ticket/statistique-note-service"> Statistique service </a>
+                    <a href="CRM-page.php?page=ticket/statistique-prevision-vs-reel"> Statistique cout </a>
                     <?php if($isItFinance) { ?>
                         <a href="CRM-page.php?page=ticket/validation-ticket">Validation des tickets</a>
                     <?php } ?>
